@@ -45,3 +45,6 @@ CS2_MAPGROUP="mg_active"    (Map pool)
 CS2_STARTMAP="de_inferno"   (Start map)
 CS2_ADDITIONAL_ARGS=""      (Optional additional arguments to pass into cs2)
 ```
+# Credits
+
+This container leans heavily on the work of [CM2Walki](https://github.com/CM2Walki/), especially his [SteamCMD](https://github.com/CM2Walki/steamcmd) container image. GG!
