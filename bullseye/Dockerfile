@@ -1,0 +1,53 @@
+###########################################################
+# Dockerfile that builds a CS2 Gameserver
+###########################################################
+FROM cm2network/steamcmd:root as build_stage
+
+LABEL maintainer="joedwards32@gmail.com"
+
+ENV STEAMUSER "changeme"
+ENV STEAMPASS "changeme"
+ENV STEAMAPPID 730
+ENV STEAMAPP cs2
+ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
+ENV CFG_URL https://raw.githubusercontent.com/joedwards32/CS2/settings.tgz
+
+COPY etc/entry.sh "${HOMEDIR}/entry.sh"
+
+RUN set -x \
+	# Install, update & upgrade packages
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends --no-install-suggests \
+		wget \
+		ca-certificates \
+		lib32z1 \
+	&& mkdir -p "${STEAMAPPDIR}" \
+	# Add entry script
+	&& chmod +x "${HOMEDIR}/entry.sh" \
+	&& chown -R "${USER}:${USER}" "${HOMEDIR}/entry.sh" "${STEAMAPPDIR}" \
+	# Clean up
+	&& rm -rf /var/lib/apt/lists/* 
+
+FROM build_stage AS bullseye-base
+
+ENV CS2_PORT=27015 \
+    CS2_MAXPLAYERS=10 \
+    CS2_RCONPW="changeme" \
+    CS2_PW="changeme" \
+    CS2_MAPGROUP="mg_active" \    
+    CS2_STARTMAP="de_inferno" \
+    CS2_GAMETYPE=0 \
+    CS2_GAMEMODE=0 \
+    CS2_ADDITIONAL_ARGS=""
+
+# Switch to user
+USER ${USER}
+
+WORKDIR ${HOMEDIR}
+
+CMD ["bash", "entry.sh"]
+
+# Expose ports
+EXPOSE 27015/tcp \
+	27015/udp \
+	27020/udp

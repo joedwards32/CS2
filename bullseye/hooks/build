@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ 
+docker build --target=bullseye-base -t $DOCKER_REPO:latest -t $DOCKER_REPO:base ${SCRIPT_DIR}/..
