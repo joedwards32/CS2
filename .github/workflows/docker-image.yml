@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag joedwards32/cs2:latest
+      run: docker build . --file bullseye/Dockerfile --tag joedwards32/cs2:latest
