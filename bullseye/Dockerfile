@@ -40,6 +40,12 @@ ENV CS2_PORT=27015 \
     CS2_GAMEMODE=0 \
     CS2_ADDITIONAL_ARGS=""
 
+# Set permissions on STEAMAPPDIR
+#   Permissions may need to be reset if persistent volume mounted
+RUN set -x \
+        && chown -R "${USER}:${USER}" "${STEAMAPPDIR}" \
+        && chmod 0777 "${STEAMAPPDIR}"
+
 # Switch to user
 USER ${USER}
 
