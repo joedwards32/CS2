@@ -1,6 +1,6 @@
 [![Docker Image CI](https://github.com/joedwards32/CS2/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/joedwards32/CS2/actions/workflows/docker-image.yml)
 
-# What is Counter-Strike 2
+# What is Counter-Strike 2?
 For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2. 
 This Docker image contains the dedicated server of the game.
 
@@ -46,7 +46,11 @@ CS2_GAMEMODE=0              (Game mode, see https://developer.valvesoftware.com/
 CS2_MAPGROUP="mg_active"    (Map pool)
 CS2_STARTMAP="de_inferno"   (Start map)
 CS2_ADDITIONAL_ARGS=""      (Optional additional arguments to pass into cs2)
+CS2_BOT_DIFFICULTY=""       (0 - easy, 1 - normal, 2 - hard, 3 - expert)
+CS2_BOT_QUOTA=""            (Number of bots)
+CS2_BOT_QUOTA_MODE=""       (fill, competitive)
 ```
+
 # Credits
 
 This container leans heavily on the work of [CM2Walki](https://github.com/CM2Walki/), especially his [SteamCMD](https://github.com/CM2Walki/steamcmd) container image. GG!
