@@ -35,8 +35,9 @@ $ docker run -d --net=host -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ --name=
 ## Environment Variables
 Feel free to overwrite these environment variables, using -e (--env): 
 ```dockerfile
-STEAMUSER="changeme"        (Steam User for SteamCMD. Steam Guard must be disabled.)
+STEAMUSER="changeme"        (Steam User for SteamCMD.)
 STEAMPASS="changeme"        (Password for Steam User.)
+STEAMGUARD=""               (Optional, Steam Guard key if enabled. Use your most recent Steam Guard key.)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
 CS2_RCONPW="changeme"       (RCON password)
 CS2_PW="changeme"           (CS2 server password)
