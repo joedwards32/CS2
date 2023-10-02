@@ -36,6 +36,7 @@ Feel free to overwrite these environment variables, using -e (--env):
 STEAMUSER="changeme"        (Steam User for SteamCMD.)
 STEAMPASS="changeme"        (Password for Steam User.)
 STEAMGUARD=""               (Optional, Steam Guard key if enabled. Use your most recent Steam Guard key.)
+CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
 CS2_RCONPW="changeme"       (RCON password)
 CS2_PW="changeme"           (CS2 server password)

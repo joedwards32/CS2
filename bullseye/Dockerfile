@@ -14,6 +14,7 @@ ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 ENV CFG_URL https://raw.githubusercontent.com/joedwards32/CS2/settings.tgz
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
+COPY etc/server.cfg "/etc/server.cfg"
 
 RUN set -x \
 	# Install, update & upgrade packages
@@ -31,7 +32,8 @@ RUN set -x \
 
 FROM build_stage AS bullseye-base
 
-ENV CS2_PORT=27015 \
+ENV CS2_SERVERNAME="cs2 private server" \
+    CS2_PORT=27015 \
     CS2_MAXPLAYERS=10 \
     CS2_RCONPW="changeme" \
     CS2_PW="changeme" \
