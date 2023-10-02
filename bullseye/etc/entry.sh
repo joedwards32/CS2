@@ -4,11 +4,12 @@ mkdir -p "${STEAMAPPDIR}" || true
 # Download Updates
 
 bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" \
-				+login "${STEAMUSER}" "${STEAMPASS}" \
+				+login "${STEAMUSER}" "${STEAMPASS}" "${STEAMGUARD}" \
 				+app_update "${STEAMAPPID}" \
 				+quit
 
 # Rewrite Config Files
+
 if [[ ! -z $CS2_BOT_DIFFICULTY ]] ; then
     sed -i "s/bot_difficulty.*/bot_difficulty ${CS2_BOT_DIFFICULTY}/" /home/steam/cs2-dedicated/game/csgo/cfg/*
 fi
