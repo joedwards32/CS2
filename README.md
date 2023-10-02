@@ -25,9 +25,7 @@ $ docker run -d --net=host -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ --name=
 
 `STEAMUSER` and `STEAMPASS` **are required as unlike CS:GO, CS2 can not be downloaded anonymously (at time of writing).**
 
-**Steam Guard must be disabled on the Steam Account**
-
-**For security reasons, it is strongly recommended that you create a new Steam Account separate to your personal Steam Account.**
+`STEAMGUARD` **must be used to provide your more recent Steam Guard key if Steam Guard is enabled on your account.**
 
 **The container will automatically update the game on startup, so if there is a game update just restart the container.**
 
