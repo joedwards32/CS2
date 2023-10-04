@@ -37,7 +37,6 @@ fi
                                 +game_mode "${CS2_GAMEMODE}" \
                                 +mapgroup "${CS2_MAPGROUP}" \
                                 +map "${CS2_STARTMAP}" \
-                                +sv_setsteamaccount \
                                 +rcon_password "${CS2_RCONPW}" \
                                 +sv_password "${CS2_PW}" \
                                 "${CS2_ADDITIONAL_ARGS}"
