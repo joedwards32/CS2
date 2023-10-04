@@ -29,6 +29,7 @@ fi
 # Start Server
 
 "${STEAMAPPDIR}/game/bin/linuxsteamrt64/cs2" -dedicated \
+                                -port "${CS2_PORT}" \
                                 -console \
                                 -usercon \
                                 -maxplayers_override "${CS2_MAXPLAYERS}" \
