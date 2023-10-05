@@ -40,7 +40,7 @@ ENV CS2_SERVERNAME="cs2 private server" \
     CS2_MAPGROUP="mg_active" \    
     CS2_STARTMAP="de_inferno" \
     CS2_GAMETYPE=0 \
-    CS2_GAMEMODE=0 \
+    CS2_GAMEMODE=1 \
     CS2_LAN=0 \
     CS2_ADDITIONAL_ARGS=""
 
