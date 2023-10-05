@@ -13,6 +13,7 @@ cp /etc/server.cfg "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 sed -i "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 sed -i "s/{{SERVER_PW}}/${CS2_PW}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 sed -i "s/{{SERVER_RCON_PW}}/${CS2_RCONPW}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
+sed -i "s/{{SERVER_LAN}}/${CS2_LAN}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 
 # Rewrite Config Files
 

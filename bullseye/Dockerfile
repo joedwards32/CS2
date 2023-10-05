@@ -41,6 +41,7 @@ ENV CS2_SERVERNAME="cs2 private server" \
     CS2_STARTMAP="de_inferno" \
     CS2_GAMETYPE=0 \
     CS2_GAMEMODE=0 \
+	CS2_LAN=0 \
     CS2_ADDITIONAL_ARGS=""
 
 # Set permissions on STEAMAPPDIR
