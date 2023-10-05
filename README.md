@@ -1,4 +1,4 @@
-[![Docker Image CI](https://github.com/joedwards32/CS2/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/joedwards32/CS2/actions/workflows/docker-image.yml)
+[![Docker Image CI](https://github.com/joedwards32/CS2/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/joedwards32/CS2/actions/workflows/docker-image.yml) [![Docker Build and Publish](https://github.com/joedwards32/CS2/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/joedwards32/CS2/actions/workflows/docker-publish.yml)
 
 # What is Counter-Strike 2?
 For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2. 
