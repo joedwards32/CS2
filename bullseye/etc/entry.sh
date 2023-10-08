@@ -8,6 +8,10 @@ bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" \
 				+app_update "${STEAMAPPID}" \
 				+quit
 
+# steamclient.so fix
+mkdir -p ~/.steam/sdk64
+ln -sfT ${STEAMCMDDIR}/linux64/steamclient.so ~/.steam/sdk64/steamclient.so
+
 # Install server.cfg
 cp /etc/server.cfg "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg \
