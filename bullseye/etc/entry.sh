@@ -36,7 +36,20 @@ cd "${STEAMAPPDIR}/game/bin/linuxsteamrt64"
 
 # Start Server
 
-"./cs2" -dedicated \
+if [[ ! -z $CS2_GAMEALIAS ]]; then
+    "./cs2" -dedicated \
+        -port "${CS2_PORT}" \
+        -console \
+        -usercon \
+        -maxplayers_override "${CS2_MAXPLAYERS}" \
+        +game_alias "${CS2_GAMEALIAS}" \
+        +mapgroup "${CS2_MAPGROUP}" \
+        +map "${CS2_STARTMAP}" \
+        +rcon_password "${CS2_RCONPW}" \
+        +sv_password "${CS2_PW}" \
+        "${CS2_ADDITIONAL_ARGS}"
+else
+    "./cs2" -dedicated \
         -port "${CS2_PORT}" \
         -console \
         -usercon \
@@ -48,3 +61,4 @@ cd "${STEAMAPPDIR}/game/bin/linuxsteamrt64"
         +rcon_password "${CS2_RCONPW}" \
         +sv_password "${CS2_PW}" \
         "${CS2_ADDITIONAL_ARGS}"
+fi
