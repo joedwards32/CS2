@@ -32,21 +32,41 @@ $ docker run -d --net=host -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ --name=
 # Configuration
 ## Environment Variables
 Feel free to overwrite these environment variables, using -e (--env): 
+
+### SteamCMD
+
 ```dockerfile
 STEAMUSER="changeme"        (Steam User for SteamCMD.)
 STEAMPASS="changeme"        (Password for Steam User.)
 STEAMGUARD=""               (Optional, Steam Guard key if enabled. Use your most recent Steam Guard key.)
+```
+
+### Server Configuration
+
+```dockerfile
 CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
 CS2_LAN="0"                 (0 - LAN mode disabled, 1 - LAN Mode enabled)
 CS2_RCONPW="changeme"       (RCON password)
 CS2_PW="changeme"           (CS2 server password)
 CS2_MAXPLAYERS=10           (Max players)
-CS2_GAMETYPE=0              (Game type, see https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
-CS2_GAMEMODE=1              (Game mode, see https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
+CS2_ADDITIONAL_ARGS=""      (Optional additional arguments to pass into cs2)
+```
+
+### Game Modes
+
+```dockerfile
+CS2_GAMEALIAS=""            (Game type, e.g. casual, competitive, deathmatch.
+                             See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
+CS2_GAMETYPE=0              (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
+CS2_GAMEMODE=1              (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
 CS2_MAPGROUP="mg_active"    (Map pool)
 CS2_STARTMAP="de_inferno"   (Start map)
-CS2_ADDITIONAL_ARGS=""      (Optional additional arguments to pass into cs2)
+```
+
+### Bots
+
+```dockerfile
 CS2_BOT_DIFFICULTY=""       (0 - easy, 1 - normal, 2 - hard, 3 - expert)
 CS2_BOT_QUOTA=""            (Number of bots)
 CS2_BOT_QUOTA_MODE=""       (fill, competitive)

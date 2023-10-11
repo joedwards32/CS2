@@ -34,15 +34,24 @@ fi
 # Switch to server directory
 cd "${STEAMAPPDIR}/game/bin/linuxsteamrt64"
 
+# Construct server arguments
+
+if [[ -z $CS2_GAMEALIAS ]]; then
+    # If CS2_GAMEALIAS is undefined then default to CS2_GAMETYPE and CS2_GAMEMODE
+    CS2_GAME_MODE_ARGS="+game_type ${CS2_GAMETYPE} +game_mode ${CS2_GAMEMODE}"
+else
+    # Else, use alias to determine game mode
+    CS2_GAME_MODE_ARGS="+game_alias ${CS2_GAMEALIAS}"
+fi
+
 # Start Server
 
-"./cs2" -dedicated \
+eval "./cs2" -dedicated \
         -port "${CS2_PORT}" \
         -console \
         -usercon \
         -maxplayers_override "${CS2_MAXPLAYERS}" \
-        +game_type "${CS2_GAMETYPE}" \
-        +game_mode "${CS2_GAMEMODE}" \
+        "${CS2_GAME_MODE_ARGS}" \
         +mapgroup "${CS2_MAPGROUP}" \
         +map "${CS2_STARTMAP}" \
         +rcon_password "${CS2_RCONPW}" \
