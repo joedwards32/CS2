@@ -45,6 +45,7 @@ STEAMGUARD=""               (Optional, Steam Guard key if enabled. Use your most
 
 ```dockerfile
 CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
+CS2_IP=0.0.0.0              (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
 CS2_LAN="0"                 (0 - LAN mode disabled, 1 - LAN Mode enabled)
 CS2_RCONPW="changeme"       (RCON password)
