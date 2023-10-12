@@ -47,7 +47,7 @@ fi
 # Start Server
 
 eval "./cs2" -dedicated \
-        -port "${CS2_PORT}" \
+        -ip "${CS2_IP}" -port "${CS2_PORT}" \
         -console \
         -usercon \
         -maxplayers_override "${CS2_MAXPLAYERS}" \

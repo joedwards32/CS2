@@ -33,6 +33,7 @@ RUN set -x \
 FROM build_stage AS bullseye-base
 
 ENV CS2_SERVERNAME="cs2 private server" \
+    CS2_IP=0.0.0.0 \
     CS2_PORT=27015 \
     CS2_MAXPLAYERS=10 \
     CS2_RCONPW="changeme" \
