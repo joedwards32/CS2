@@ -30,6 +30,10 @@ $ docker run -d --net=host -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ --name=
 **The container will automatically update the game on startup, so if there is a game update just restart the container.**
 
 # Configuration
+
+## System Requirements
+Please note that you need approximately 1.5g of free RAM. If this is not available, container will crash with err 137.
+
 ## Environment Variables
 Feel free to overwrite these environment variables, using -e (--env): 
 
