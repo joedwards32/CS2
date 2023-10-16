@@ -50,7 +50,7 @@ eval "./cs2" -dedicated \
         -ip "${CS2_IP}" -port "${CS2_PORT}" \
         -console \
         -usercon \
-        -maxplayers_override "${CS2_MAXPLAYERS}" \
+        -maxplayers "${CS2_MAXPLAYERS}" \
         "${CS2_GAME_MODE_ARGS}" \
         +mapgroup "${CS2_MAPGROUP}" \
         +map "${CS2_STARTMAP}" \
