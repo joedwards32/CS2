@@ -1,6 +1,9 @@
 ###########################################################
 # Dockerfile that builds a CS2 Gameserver
 ###########################################################
+
+# BUILD STAGE
+
 FROM cm2network/steamcmd:root as build_stage
 
 LABEL maintainer="joedwards32@gmail.com"
@@ -23,18 +26,23 @@ RUN set -x \
 		wget \
 		ca-certificates \
 		lib32z1 \
+                simpleproxy \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	# Add entry script
 	&& chmod +x "${HOMEDIR}/entry.sh" \
 	&& chown -R "${USER}:${USER}" "${HOMEDIR}/entry.sh" "${STEAMAPPDIR}" \
 	# Clean up
-	&& rm -rf /var/lib/apt/lists/* 
+        && apt-get clean \
+        && find /var/lib/apt/lists/ -type f -delete
+
+# BASE
 
 FROM build_stage AS bullseye-base
 
 ENV CS2_SERVERNAME="cs2 private server" \
     CS2_IP=0.0.0.0 \
     CS2_PORT=27015 \
+    CS2_RCON_PORT="" \
     CS2_MAXPLAYERS=10 \
     CS2_RCONPW="changeme" \
     CS2_PW="changeme" \

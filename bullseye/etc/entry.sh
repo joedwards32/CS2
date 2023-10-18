@@ -46,6 +46,11 @@ fi
 
 # Start Server
 
+if [[ ! -z $CS2_RCON_PORT ]]; then
+    echo "Establishing Simpleproxy for ${CS2_RCON_PORT} to 127.0.0.1:${CS2_PORT}"
+    simpleproxy -L "${CS2_RCON_PORT}" -R 127.0.0.1:"${CS2_PORT}" &
+fi
+
 eval "./cs2" -dedicated \
         -ip "${CS2_IP}" -port "${CS2_PORT}" \
         -console \
