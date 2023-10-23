@@ -29,7 +29,7 @@ or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/
 $ docker compose --file examples/docker-compose.yml up -d cs2-server
 ```
 
-Remember about having at least **40GB** of free disk space!
+You must have at least **40GB** of free disk space! See [System Requirements](#System Requirements).
 
 `STEAMUSER` and `STEAMPASS` **are required as unlike CS:GO, CS2 can not be downloaded anonymously (at time of writing).**
 
@@ -40,7 +40,12 @@ Remember about having at least **40GB** of free disk space!
 # Configuration
 
 ## System Requirements
-Please note that you need approximately 1.5g of free RAM. If this is not available, container will crash with err 137.
+
+Minimum system requirements are:
+
+* 2 CPUs
+* 2GiB RAM
+* 40GB of disk space for the container or mounted as a persistent volume on `/home/steam/cs2-dedicated/`
 
 ## Environment Variables
 Feel free to overwrite these environment variables, using -e (--env): 
