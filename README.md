@@ -23,9 +23,10 @@ $ chmod 777 $(pwd)/cs2-data # Makes sure the directory is writeable by the unpri
 $ docker run -d --net=host -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ --name=cs2-dedicated -e STEAMUSER={YOUR_STEAM_USER} -e STEAMPASS={YOUR_STEAM_PASSWD} joedwards32/cs2
 ```
 
-or using docker-compose:
+or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/main/examples/docker-compose.yml):
 ```console
-$ docker-compose up -d
+# Remember to update passwords in your compose file
+$ docker compose --file examples/docker-compose.yml up -d cs2-server
 ```
 
 Remember about having at least **40GB** of free disk space!
