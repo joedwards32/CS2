@@ -92,6 +92,15 @@ CS2_BOT_QUOTA=""            (Number of bots)
 CS2_BOT_QUOTA_MODE=""       (fill, competitive)
 ```
 
+### CSTV/SourceTV
+
+```dockerfile
+TV_ENABLE=1                 (0 - disable, 1 - enable)
+TV_PORT=27020               (SourceTV/CSTV port to bind to)
+TV_AUTORECORD=0             (Automatically record all games as CSTV demos: 0=off, 1=on)
+TV_RELAY_PW="changeme"      (CSTV password for relay proxies)
+```
+
 # Credits
 
 This container leans heavily on the work of [CM2Walki](https://github.com/CM2Walki/), especially his [SteamCMD](https://github.com/CM2Walki/steamcmd) container image. GG!
