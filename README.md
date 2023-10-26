@@ -29,7 +29,7 @@ or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/
 $ docker compose --file examples/docker-compose.yml up -d cs2-server
 ```
 
-You must have at least **40GB** of free disk space! See [System Requirements](#System Requirements).
+You must have at least **40GB** of free disk space! See [System Requirements](./#System Requirements).
 
 `STEAMUSER` and `STEAMPASS` **are required as unlike CS:GO, CS2 can not be downloaded anonymously (at time of writing).**
 
