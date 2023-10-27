@@ -98,6 +98,7 @@ CS2_BOT_QUOTA_MODE=""       (fill, competitive)
 TV_ENABLE=1                 (0 - disable, 1 - enable)
 TV_PORT=27020               (SourceTV/CSTV port to bind to)
 TV_AUTORECORD=0             (Automatically record all games as CSTV demos: 0=off, 1=on)
+TV_PW="changeme"            (CSTV password for clients)
 TV_RELAY_PW="changeme"      (CSTV password for relay proxies)
 ```
 

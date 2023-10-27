@@ -55,6 +55,7 @@ ENV CS2_SERVERNAME="cs2 private server" \
     TV_AUTORECORD=0 \
     TV_ENABLE=1 \
     TV_PORT=27020 \
+    TV_PW="changeme" \
     TV_RELAY_PW="changeme" \
     CS2_ADDITIONAL_ARGS=""
 
