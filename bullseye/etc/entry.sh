@@ -23,7 +23,7 @@ sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
        -e "s/{{TV_AUTORECORD}}/${TV_AUTORECORD}/g" \
        -e "s/{{TV_PW}}/${TV_PW}/g" \
        -e "s/{{TV_RELAY_PW}}/${TV_RELAY_PW}/g" \
-       -e "s/{{TV_SNAPSHOTRATE}}/${TV_SNAPSHOTRATE}/g" \
+       -e "s/{{TV_MAXRATE}}/${TV_MAXRATE}/g" \
        -e "s/{{TV_DELAY}}/${TV_DELAY}/g" \
        "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 

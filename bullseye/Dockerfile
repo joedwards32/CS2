@@ -53,11 +53,11 @@ ENV CS2_SERVERNAME="cs2 private server" \
     CS2_GAMEMODE=1 \
     CS2_LAN=0 \
     TV_AUTORECORD=0 \
-    TV_ENABLE=1 \
+    TV_ENABLE=0 \
     TV_PORT=27020 \
     TV_PW="changeme" \
     TV_RELAY_PW="changeme" \
-    TV_SNAPSHOTRATE=32 \
+    TV_MAXRATE=0 \
     TV_DELAY=0 \
     CS2_ADDITIONAL_ARGS=""
 
