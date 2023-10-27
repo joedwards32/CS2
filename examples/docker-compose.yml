@@ -34,6 +34,8 @@ services:
       - TV_PORT=27020               # Host SourceTV port
       - TV_PW=changeme              # CSTV password for clients
       - TV_RELAY_PW=changeme        # CSTV password for relay proxies
+      - TV_SNAPSHOTRATE=32          # World snapshots to broadcast per second. Affects camera tickrate.
+      - TV_DELAY=0                  # CSTV broadcast delay in seconds
     volumes:
       - cs2:/home/steam/cs2-dedicated/  # (Change /mnt/cs2 according to your volume location)
     ports:

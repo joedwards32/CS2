@@ -57,6 +57,8 @@ ENV CS2_SERVERNAME="cs2 private server" \
     TV_PORT=27020 \
     TV_PW="changeme" \
     TV_RELAY_PW="changeme" \
+    TV_SNAPSHOTRATE=32 \
+    TV_DELAY=0 \
     CS2_ADDITIONAL_ARGS=""
 
 # Set permissions on STEAMAPPDIR
