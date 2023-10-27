@@ -100,6 +100,8 @@ TV_PORT=27020               (SourceTV/CSTV port to bind to)
 TV_AUTORECORD=0             (Automatically record all games as CSTV demos: 0=off, 1=on)
 TV_PW="changeme"            (CSTV password for clients)
 TV_RELAY_PW="changeme"      (CSTV password for relay proxies)
+TV_SNAPSHOTRATE=32          (World snapshots to broadcast per second. Affects camera tickrate.)
+TV_DELAY=0                  (CSTV broadcast delay in seconds)
 ```
 
 # Credits
