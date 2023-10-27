@@ -32,6 +32,7 @@ services:
       - TV_AUTORECORD=0             # Automatically records all games as CSTV demos: 0=off, 1=on.
       - TV_ENABLE=1                 # Activates CSTV on server: 0=off, 1=on.
       - TV_PORT=27020               # Host SourceTV port
+      - TV_PW=changeme              # CSTV password for clients
       - TV_RELAY_PW=changeme        # CSTV password for relay proxies
     volumes:
       - cs2:/home/steam/cs2-dedicated/  # (Change /mnt/cs2 according to your volume location)
