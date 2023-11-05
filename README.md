@@ -62,7 +62,7 @@ STEAMGUARD=""               (Optional, Steam Guard key if enabled. Use your most
 
 ```dockerfile
 CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
-CS2_IP=0.0.0.0              (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
+CS2_IP=""                   (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
 CS2_RCON_PORT=""            (Optional, use a simple TCP proxy to have RCON listen on an alternative port.
                              Useful for services like AWS Fargate which do not support mixed protocol ports.)
