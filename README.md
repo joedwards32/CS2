@@ -104,6 +104,17 @@ TV_MAXRATE=0                (Max CSTV spectator bandwidth rate allowed, 0 == unl
 TV_DELAY=0                  (CSTV broadcast delay in seconds)
 ```
 
+# Customizing this Container
+
+## Pre and Post Hooks
+
+The container includes two scripts for executing custom actions:
+
+* `/home/steam/cs2-dedicated/pre.sh` is executed before the CS2 server starts
+* `/home/steam/cs2-dedicated/post.sh` is executed after the CS2 server stops
+
+When using a persient volume mounted at `/home/steam/cs2-dedicated/` you may edit these scripts to perform custom actions, such as enabling metamod.
+
 # Credits
 
 This container leans heavily on the work of [CM2Walki](https://github.com/CM2Walki/), especially his [SteamCMD](https://github.com/CM2Walki/steamcmd) container image. GG!

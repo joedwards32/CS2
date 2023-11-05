@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Create App Dir
 mkdir -p "${STEAMAPPDIR}" || true
 
 # Download Updates
@@ -27,6 +29,14 @@ sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
        -e "s/{{TV_DELAY}}/${TV_DELAY}/g" \
        "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 
+# Install hooks
+if [[ ! -f "${STEAMAPPDIR}/pre.sh" ]] ; then
+    cp /etc/pre.sh "${STEAMAPPDIR}/pre.sh"
+fi
+if [[ ! -f "${STEAMAPPDIR}/post.sh" ]] ; then
+    cp /etc/post.sh "${STEAMAPPDIR}/post.sh"
+fi
+
 # Rewrite Config Files
 
 if [[ ! -z $CS2_BOT_DIFFICULTY ]] ; then
@@ -41,6 +51,9 @@ fi
 
 # Switch to server directory
 cd "${STEAMAPPDIR}/game/bin/linuxsteamrt64"
+
+# Pre Hook
+bash "${STEAMAPPDIR}/pre.sh"
 
 # Construct server arguments
 
@@ -70,3 +83,6 @@ eval "./cs2" -dedicated \
         +rcon_password "${CS2_RCONPW}" \
         +sv_password "${CS2_PW}" \
         "${CS2_ADDITIONAL_ARGS}"
+
+# Post Hook
+bash "${STEAMAPPDIR}/post.sh"
