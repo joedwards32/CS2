@@ -18,6 +18,8 @@ ENV CFG_URL https://raw.githubusercontent.com/joedwards32/CS2/settings.tgz
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/server.cfg "/etc/server.cfg"
+COPY etc/pre.sh "/etc/pre.sh"
+COPY etc/post.sh "/etc/post.sh"
 
 RUN set -x \
 	# Install, update & upgrade packages
@@ -53,6 +55,13 @@ ENV CS2_SERVERNAME="cs2 private server" \
     CS2_GAMETYPE=0 \
     CS2_GAMEMODE=1 \
     CS2_LAN=0 \
+    TV_AUTORECORD=0 \
+    TV_ENABLE=0 \
+    TV_PORT=27020 \
+    TV_PW="changeme" \
+    TV_RELAY_PW="changeme" \
+    TV_MAXRATE=0 \
+    TV_DELAY=0 \
     CS2_ADDITIONAL_ARGS=""
 
 # Set permissions on STEAMAPPDIR

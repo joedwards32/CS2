@@ -29,7 +29,7 @@ or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/
 $ docker compose --file examples/docker-compose.yml up -d cs2-server
 ```
 
-You must have at least **40GB** of free disk space! See [System Requirements](#System Requirements).
+You must have at least **40GB** of free disk space! See [System Requirements](./#system-requirements).
 
 `STEAMUSER` and `STEAMPASS` **are required as unlike CS:GO, CS2 can not be downloaded anonymously (at time of writing).**
 
@@ -62,7 +62,7 @@ STEAMGUARD=""               (Optional, Steam Guard key if enabled. Use your most
 
 ```dockerfile
 CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
-CS2_IP=0.0.0.0              (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
+CS2_IP=""                   (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
 CS2_RCON_PORT=""            (Optional, use a simple TCP proxy to have RCON listen on an alternative port.
                              Useful for services like AWS Fargate which do not support mixed protocol ports.)
@@ -91,6 +91,29 @@ CS2_BOT_DIFFICULTY=""       (0 - easy, 1 - normal, 2 - hard, 3 - expert)
 CS2_BOT_QUOTA=""            (Number of bots)
 CS2_BOT_QUOTA_MODE=""       (fill, competitive)
 ```
+
+### CSTV/SourceTV
+
+```dockerfile
+TV_ENABLE=0                 (0 - disable, 1 - enable)
+TV_PORT=27020               (SourceTV/CSTV port to bind to)
+TV_AUTORECORD=0             (Automatically record all games as CSTV demos: 0=off, 1=on)
+TV_PW="changeme"            (CSTV password for clients)
+TV_RELAY_PW="changeme"      (CSTV password for relay proxies)
+TV_MAXRATE=0                (Max CSTV spectator bandwidth rate allowed, 0 == unlimited)
+TV_DELAY=0                  (CSTV broadcast delay in seconds)
+```
+
+# Customizing this Container
+
+## Pre and Post Hooks
+
+The container includes two scripts for executing custom actions:
+
+* `/home/steam/cs2-dedicated/pre.sh` is executed before the CS2 server starts
+* `/home/steam/cs2-dedicated/post.sh` is executed after the CS2 server stops
+
+When using a persient volume mounted at `/home/steam/cs2-dedicated/` you may edit these scripts to perform custom actions, such as enabling metamod.
 
 # Credits
 

@@ -28,10 +28,19 @@ services:
       - CS2_BOT_DIFFICULTY          # (0 - easy, 1 - normal, 2 - hard, 3 - expert)
       - CS2_BOT_QUOTA               # (Number of bots)
       - CS2_BOT_QUOTA_MODE          # (fill, competitive)
+      # TV
+      - TV_AUTORECORD=0             # Automatically records all games as CSTV demos: 0=off, 1=on.
+      - TV_ENABLE=0                 # Activates CSTV on server: 0=off, 1=on.
+      - TV_PORT=27020               # Host SourceTV port
+      - TV_PW=changeme              # CSTV password for clients
+      - TV_RELAY_PW=changeme        # CSTV password for relay proxies
+      - TV_MAXRATE=0                # World snapshots to broadcast per second. Affects camera tickrate.
+      - TV_DELAY=0                  # Max CSTV spectator bandwidth rate allowed, 0 == unlimited
     volumes:
       - cs2:/home/steam/cs2-dedicated/  # (Change /mnt/cs2 according to your volume location)
     ports:
       - "27015:27015/tcp"           # TCP
       - "27015:27015/udp"           # UDP
+      - "27020:27020/udp"           # UDP
 volumes:
   cs2:

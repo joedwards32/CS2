@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Create App Dir
 mkdir -p "${STEAMAPPDIR}" || true
 
 # Download Updates
@@ -14,10 +16,25 @@ ln -sfT ${STEAMCMDDIR}/linux64/steamclient.so ~/.steam/sdk64/steamclient.so
 
 # Install server.cfg
 cp /etc/server.cfg "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
-sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg \
-       -e "s/{{SERVER_PW}}/${CS2_PW}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg \
-       -e "s/{{SERVER_RCON_PW}}/${CS2_RCONPW}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg \
-       -e "s/{{SERVER_LAN}}/${CS2_LAN}/g" "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
+sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
+       -e "s/{{SERVER_PW}}/${CS2_PW}/g" \
+       -e "s/{{SERVER_RCON_PW}}/${CS2_RCONPW}/g" \
+       -e "s/{{TV_ENABLE}}/${TV_ENABLE}/g" \
+       -e "s/{{TV_PORT}}/${TV_PORT}/g" \
+       -e "s/{{TV_AUTORECORD}}/${TV_AUTORECORD}/g" \
+       -e "s/{{TV_PW}}/${TV_PW}/g" \
+       -e "s/{{TV_RELAY_PW}}/${TV_RELAY_PW}/g" \
+       -e "s/{{TV_MAXRATE}}/${TV_MAXRATE}/g" \
+       -e "s/{{TV_DELAY}}/${TV_DELAY}/g" \
+       "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
+
+# Install hooks
+if [[ ! -f "${STEAMAPPDIR}/pre.sh" ]] ; then
+    cp /etc/pre.sh "${STEAMAPPDIR}/pre.sh"
+fi
+if [[ ! -f "${STEAMAPPDIR}/post.sh" ]] ; then
+    cp /etc/post.sh "${STEAMAPPDIR}/post.sh"
+fi
 
 # Rewrite Config Files
 
@@ -34,6 +51,9 @@ fi
 # Switch to server directory
 cd "${STEAMAPPDIR}/game/bin/linuxsteamrt64"
 
+# Pre Hook
+bash "${STEAMAPPDIR}/pre.sh"
+
 # Construct server arguments
 
 if [[ -z $CS2_GAMEALIAS ]]; then
@@ -44,6 +64,12 @@ else
     CS2_GAME_MODE_ARGS="+game_alias ${CS2_GAMEALIAS}"
 fi
 
+if [[ -z $CS2_IP ]]; then
+    CS2_IP_ARGS=""
+else
+    CS2_IP_ARGS="-ip ${CS2_IP}"
+fi
+
 # Start Server
 
 if [[ ! -z $CS2_RCON_PORT ]]; then
@@ -52,7 +78,7 @@ if [[ ! -z $CS2_RCON_PORT ]]; then
 fi
 
 eval "./cs2" -dedicated \
-        -ip "${CS2_IP}" -port "${CS2_PORT}" \
+        "${CS2_IP_ARGS}" -port "${CS2_PORT}" \
         -console \
         -usercon \
         -maxplayers "${CS2_MAXPLAYERS}" \
@@ -61,4 +87,8 @@ eval "./cs2" -dedicated \
         +map "${CS2_STARTMAP}" \
         +rcon_password "${CS2_RCONPW}" \
         +sv_password "${CS2_PW}" \
+        +sv_lan "${CS2_LAN}" \
         "${CS2_ADDITIONAL_ARGS}"
+
+# Post Hook
+bash "${STEAMAPPDIR}/post.sh"
