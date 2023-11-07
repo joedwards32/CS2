@@ -6,7 +6,7 @@ mkdir -p "${STEAMAPPDIR}" || true
 # Download Updates
 
 bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" \
-				+login "${STEAMUSER}" "${STEAMPASS}" "${STEAMGUARD}" \
+				+login anonymous \
 				+app_update "${STEAMAPPID}" \
 				+quit
 
