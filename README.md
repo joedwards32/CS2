@@ -31,10 +31,6 @@ $ docker compose --file examples/docker-compose.yml up -d cs2-server
 
 You must have at least **40GB** of free disk space! See [System Requirements](./#system-requirements).
 
-`STEAMUSER` and `STEAMPASS` **are required as unlike CS:GO, CS2 can not be downloaded anonymously (at time of writing).**
-
-`STEAMGUARD` **must be used to provide your more recent Steam Guard key if Steam Guard is enabled on your account.**
-
 **The container will automatically update the game on startup, so if there is a game update just restart the container.**
 
 # Configuration
@@ -49,14 +45,6 @@ Minimum system requirements are:
 
 ## Environment Variables
 Feel free to overwrite these environment variables, using -e (--env): 
-
-### SteamCMD
-
-```dockerfile
-STEAMUSER="changeme"        (Steam User for SteamCMD.)
-STEAMPASS="changeme"        (Password for Steam User.)
-STEAMGUARD=""               (Optional, Steam Guard key if enabled. Use your most recent Steam Guard key.)
-```
 
 ### Server Configuration
 
