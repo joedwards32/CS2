@@ -13,14 +13,14 @@ This Docker image contains the dedicated server of the game.
 
 Running on the *host* interface (recommended) using Docker:<br/>
 ```console
-$ docker run -d --net=host --name=cs2 -e STEAMUSER={YOUR_STEAM_USER} -e STEAMPASS={YOUR_STEAM_PASSWD} joedwards32/cs2
+$ docker run -d --name=cs2 -p 27015:27015 -p 27020:27020 joedwards32/cs2
 ```
 
 Running using a bind mount for data persistence on container recreation:
 ```console
 $ mkdir -p $(pwd)/cs2-data
 $ chmod 777 $(pwd)/cs2-data # Makes sure the directory is writeable by the unprivileged container user
-$ docker run -d --net=host -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ --name=cs2-dedicated -e STEAMUSER={YOUR_STEAM_USER} -e STEAMPASS={YOUR_STEAM_PASSWD} joedwards32/cs2
+$ docker run -d --name=cs2 -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015 -p 27020:27020 joedwards32/cs2
 ```
 
 or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/main/examples/docker-compose.yml):
