@@ -11,7 +11,7 @@ This Docker image contains the dedicated server of the game.
 # How to use this image
 ## Hosting a simple game server
 
-Running on the *host* interface (recommended) using Docker:<br/>
+Running using Docker:
 ```console
 $ docker run -d --name=cs2 -p 27015:27015 -p 27020:27020 joedwards32/cs2
 ```
