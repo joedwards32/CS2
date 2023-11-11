@@ -16,6 +16,22 @@ ln -sfT ${STEAMCMDDIR}/linux64/steamclient.so ~/.steam/sdk64/steamclient.so
 
 # Install server.cfg
 cp /etc/server.cfg "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
+
+# Install hooks
+if [[ ! -f "${STEAMAPPDIR}/pre.sh" ]] ; then
+    cp /etc/pre.sh "${STEAMAPPDIR}/pre.sh"
+fi
+if [[ ! -f "${STEAMAPPDIR}/post.sh" ]] ; then
+    cp /etc/post.sh "${STEAMAPPDIR}/post.sh"
+fi
+
+# Download and extract custom config bundle
+if [[ ! -z $CS2_CFG_URL ]]; then
+    wget -qO- "${CS2_CFG_URL}" | tar xvzf - -C "${STEAMAPPDIR}"
+fi
+
+# Rewrite Config Files
+
 sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
        -e "s/{{SERVER_PW}}/${CS2_PW}/g" \
        -e "s/{{SERVER_RCON_PW}}/${CS2_RCONPW}/g" \
@@ -27,16 +43,6 @@ sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
        -e "s/{{TV_MAXRATE}}/${TV_MAXRATE}/g" \
        -e "s/{{TV_DELAY}}/${TV_DELAY}/g" \
        "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
-
-# Install hooks
-if [[ ! -f "${STEAMAPPDIR}/pre.sh" ]] ; then
-    cp /etc/pre.sh "${STEAMAPPDIR}/pre.sh"
-fi
-if [[ ! -f "${STEAMAPPDIR}/post.sh" ]] ; then
-    cp /etc/post.sh "${STEAMAPPDIR}/post.sh"
-fi
-
-# Rewrite Config Files
 
 if [[ ! -z $CS2_BOT_DIFFICULTY ]] ; then
     sed -i "s/bot_difficulty.*/bot_difficulty ${CS2_BOT_DIFFICULTY}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
