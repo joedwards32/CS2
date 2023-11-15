@@ -8,9 +8,6 @@ FROM cm2network/steamcmd:root as build_stage
 
 LABEL maintainer="joedwards32@gmail.com"
 
-ENV STEAMUSER "changeme"
-ENV STEAMPASS "changeme"
-ENV STEAMGUARD ""
 ENV STEAMAPPID 730
 ENV STEAMAPP cs2
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"

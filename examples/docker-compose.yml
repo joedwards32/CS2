@@ -4,13 +4,8 @@ services:
     image: joedwards32/cs2
     container_name: cs2-dedicated
     environment:
-      # SteamCMD
-      - STEAMUSER=changeme          # (Steam User for SteamCMD.)
-      - STEAMPASS=changeme          # (Password for Steam User.)
-      - STEAMGUARD                  # (Optional, Steam Guard key if enabled. Use your most recent Steam Guard key.)
       # Server configuration
       - CS2_SERVERNAME=changeme     # (Set the visible name for your private server)
-      - CS2_IP=0.0.0.0              # (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
       - CS2_PORT=27015              # (CS2 server listen port tcp_udp)
       - CS2_RCON_PORT               # (Optional, use a simple TCP proxy to have RCON listen on an alternative port. Useful for services like AWS Fargate which do not support mixed protocol ports.)
       - CS2_LAN=0                   # (0 - LAN mode disabled, 1 - LAN Mode enabled)
