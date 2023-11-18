@@ -26,6 +26,7 @@ RUN set -x \
 		ca-certificates \
 		lib32z1 \
                 simpleproxy \
+                libicu-dev \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	# Add entry script
 	&& chmod +x "${HOMEDIR}/entry.sh" \
