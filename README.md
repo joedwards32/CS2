@@ -13,14 +13,14 @@ This Docker image contains the dedicated server of the game.
 
 Running using Docker:
 ```console
-$ docker run -d --name=cs2 -p 27015:27015 -p 27020:27020 joedwards32/cs2
+$ docker run -d --name=cs2 -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
 ```
 
 Running using a bind mount for data persistence on container recreation:
 ```console
 $ mkdir -p $(pwd)/cs2-data
 $ chmod 777 $(pwd)/cs2-data # Makes sure the directory is writeable by the unprivileged container user
-$ docker run -d --name=cs2 -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015 -p 27020:27020 joedwards32/cs2
+$ docker run -d --name=cs2 -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
 ```
 
 or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/main/examples/docker-compose.yml):
@@ -60,6 +60,8 @@ CS2_PW="changeme"           (CS2 server password)
 CS2_MAXPLAYERS=10           (Max players)
 CS2_ADDITIONAL_ARGS=""      (Optional additional arguments to pass into cs2)
 ```
+
+**Note:** When using `CS2_RCON_PORT` don't forget to map the port chosen with TCP protocol (e.g., add `-p 27050:27050/tcp` on the `docker run` command or add the port to the `docker-compose.yml` file).
 
 ### Game Modes
 
