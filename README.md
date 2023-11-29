@@ -13,19 +13,19 @@ This Docker image contains the dedicated server of the game.
 
 Running using Docker:
 ```console
-$ docker run -d --name=cs2 -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
+$ docker run -d --name=cs2 -e SRCDS_TOKEN={YOURTOKEN} -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
 ```
 
 Running using a bind mount for data persistence on container recreation:
 ```console
 $ mkdir -p $(pwd)/cs2-data
 $ chmod 777 $(pwd)/cs2-data # Makes sure the directory is writeable by the unprivileged container user
-$ docker run -d --name=cs2 -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
+$ docker run -d --name=cs2 -e SRCDS_TOKEN={YOURTOKEN} -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
 ```
 
 or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/main/examples/docker-compose.yml):
 ```console
-# Remember to update passwords in your compose file
+# Remember to update passwords and SRCDS_TOKEN in your compose file
 $ docker compose --file examples/docker-compose.yml up -d cs2-server
 ```
 
@@ -49,6 +49,7 @@ Feel free to overwrite these environment variables, using -e (--env):
 ### Server Configuration
 
 ```dockerfile
+SRCDS_TOKEN=""              Game Server Token from https://steamcommunity.com/dev/managegameservers
 CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
 CS2_IP=""                   (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)

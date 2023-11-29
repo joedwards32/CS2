@@ -70,6 +70,10 @@ else
     CS2_IP_ARGS="-ip ${CS2_IP}"
 fi
 
+if [[ ! -z $SRCDS_TOKEN ]]; then
+    SV_SETSTEAMACCOUNT_ARGS="+sv_setsteamaccount ${SRCDS_TOKEN}"
+fi
+
 # Start Server
 
 if [[ ! -z $CS2_RCON_PORT ]]; then
@@ -86,6 +90,7 @@ eval "./cs2" -dedicated \
         +mapgroup "${CS2_MAPGROUP}" \
         +map "${CS2_STARTMAP}" \
         +rcon_password "${CS2_RCONPW}" \
+        "${SV_SETSTEAMACCOUNT_ARGS}" \
         +sv_password "${CS2_PW}" \
         +sv_lan "${CS2_LAN}" \
         "${CS2_ADDITIONAL_ARGS}"

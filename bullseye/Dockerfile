@@ -59,6 +59,7 @@ ENV CS2_SERVERNAME="cs2 private server" \
     TV_RELAY_PW="changeme" \
     TV_MAXRATE=0 \
     TV_DELAY=0 \
+    SRCDS_TOKEN="" \
     CS2_ADDITIONAL_ARGS=""
 
 # Set permissions on STEAMAPPDIR
