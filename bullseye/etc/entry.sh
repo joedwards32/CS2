@@ -17,7 +17,7 @@ ln -sfT ${STEAMCMDDIR}/linux64/steamclient.so ~/.steam/sdk64/steamclient.so
 # Install server.cfg
 cp /etc/server.cfg "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 
-# Install hooks
+# Install hooks if they don't already exist
 if [[ ! -f "${STEAMAPPDIR}/pre.sh" ]] ; then
     cp /etc/pre.sh "${STEAMAPPDIR}/pre.sh"
 fi
@@ -27,6 +27,7 @@ fi
 
 # Download and extract custom config bundle
 if [[ ! -z $CS2_CFG_URL ]]; then
+    echo "Downloading config pack from ${CS2_CFG_URL}"
     wget -qO- "${CS2_CFG_URL}" | tar xvzf - -C "${STEAMAPPDIR}"
 fi
 
@@ -87,6 +88,7 @@ if [[ ! -z $CS2_RCON_PORT ]]; then
     simpleproxy -L "${CS2_RCON_PORT}" -R 127.0.0.1:"${CS2_PORT}" &
 fi
 
+echo "Starting CS2 Dedicated Server"
 eval "./cs2" -dedicated \
         "${CS2_IP_ARGS}" -port "${CS2_PORT}" \
         -console \
