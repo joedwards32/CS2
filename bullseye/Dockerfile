@@ -11,7 +11,6 @@ LABEL maintainer="joedwards32@gmail.com"
 ENV STEAMAPPID 730
 ENV STEAMAPP cs2
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
-ENV CFG_URL https://raw.githubusercontent.com/joedwards32/CS2/settings.tgz
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/server.cfg "/etc/server.cfg"
@@ -60,6 +59,7 @@ ENV CS2_SERVERNAME="cs2 private server" \
     TV_MAXRATE=0 \
     TV_DELAY=0 \
     SRCDS_TOKEN="" \
+    CS2_CFG_URL="" \
     CS2_ADDITIONAL_ARGS=""
 
 # Set permissions on STEAMAPPDIR

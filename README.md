@@ -49,7 +49,7 @@ Feel free to overwrite these environment variables, using -e (--env):
 ### Server Configuration
 
 ```dockerfile
-SRCDS_TOKEN=""              Game Server Token from https://steamcommunity.com/dev/managegameservers
+SRCDS_TOKEN=""              (Game Server Token from https://steamcommunity.com/dev/managegameservers)
 CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
 CS2_IP=""                   (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
@@ -105,6 +105,29 @@ The container includes two scripts for executing custom actions:
 * `/home/steam/cs2-dedicated/post.sh` is executed after the CS2 server stops
 
 When using a persient volume mounted at `/home/steam/cs2-dedicated/` you may edit these scripts to perform custom actions, such as enabling metamod.
+
+## Overriding Game Mode Defaults
+
+The default configurations for each game mode are stored in `/home/steam/cs2-dedicated/csgo/cfg/`. For example, the Competitive mode defaults are set by `gamemode_competitive.cfg`.
+
+When using a persistent volume mounted at `/home/steam/cs2-dedicated/`, these defaults can be overridden by adding your own settings to `gamemode_competitive_server.cfg`.
+
+```
+// Game Mode Competitive Server Overrides 
+
+mp_maxrounds	16	// Shorter games
+```
+
+## Customisation Bundle
+
+The container can be instructed to download a extract a Tar Gzip of configuration files and other customisations from a given URL.
+
+```dockerfile
+CS2_CFG_URL=""          (HTTP/HTTPS URL to fetch a Tar Gzip bundle of configuration files/mods)
+```
+
+See [examples](https://github.com/joedwards32/CS2/blob/main/examples/cs2.cfg.tgz) for a correctly formatted Tar Gzip customisation bundle.
+
 
 # Credits
 
