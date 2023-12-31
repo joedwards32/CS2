@@ -51,6 +51,7 @@ Feel free to overwrite these environment variables, using -e (--env):
 ```dockerfile
 SRCDS_TOKEN=""              (Game Server Token from https://steamcommunity.com/dev/managegameservers)
 CS2_SERVERNAME="changeme"   (Set the visible name for your private server)
+CS2_CHEATS=0                (0 - disable cheats, 1 - enable cheats)
 CS2_IP=""                   (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
 CS2_PORT=27015              (CS2 server listen port tcp_udp)
 CS2_RCON_PORT=""            (Optional, use a simple TCP proxy to have RCON listen on an alternative port.
