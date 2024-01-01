@@ -34,6 +34,7 @@ fi
 # Rewrite Config Files
 
 sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
+       -e "s/{{SERVER_CHEATS}}/${CS2_CHEATS}/g" \
        -e "s/{{SERVER_HIBERNATE}}/${CS2_SERVER_HIBERNATE}/g" \
        -e "s/{{SERVER_PW}}/${CS2_PW}/g" \
        -e "s/{{SERVER_RCON_PW}}/${CS2_RCONPW}/g" \

@@ -39,6 +39,7 @@ RUN set -x \
 FROM build_stage AS bullseye-base
 
 ENV CS2_SERVERNAME="cs2 private server" \
+    CS2_CHEATS=0 \
     CS2_IP=0.0.0.0 \
     CS2_SERVER_HIBERNATE=0 \
     CS2_PORT=27015 \
