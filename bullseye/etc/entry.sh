@@ -33,18 +33,20 @@ fi
 
 # Rewrite Config Files
 
-sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
-       -e "s/{{SERVER_CHEATS}}/${CS2_CHEATS}/g" \
-       -e "s/{{SERVER_HIBERNATE}}/${CS2_SERVER_HIBERNATE}/g" \
-       -e "s/{{SERVER_PW}}/${CS2_PW}/g" \
-       -e "s/{{SERVER_RCON_PW}}/${CS2_RCONPW}/g" \
-       -e "s/{{TV_ENABLE}}/${TV_ENABLE}/g" \
-       -e "s/{{TV_PORT}}/${TV_PORT}/g" \
-       -e "s/{{TV_AUTORECORD}}/${TV_AUTORECORD}/g" \
-       -e "s/{{TV_PW}}/${TV_PW}/g" \
-       -e "s/{{TV_RELAY_PW}}/${TV_RELAY_PW}/g" \
-       -e "s/{{TV_MAXRATE}}/${TV_MAXRATE}/g" \
-       -e "s/{{TV_DELAY}}/${TV_DELAY}/g" \
+sed -r -i -e "s/^(hostname) .*/\1 ${CS2_SERVERNAME}/g" \
+       -e "s/^(sv_cheats) .*/\1 ${CS2_CHEATS}/g" \
+       -e "s/^(sv_hibernate_when_empty) .*/\1 ${CS2_SERVER_HIBERNATE}/g" \
+       -e "s/^(sv_password) .*/\1 ${CS2_PW}/g" \
+       -e "s/^(rcon_password) .*/\1 ${CS2_RCONPW}/g" \
+       -e "s/^(tv_enable) .*/\1 ${TV_ENABLE}/g" \
+       -e "s/^(tv_port) .*/\1 ${TV_PORT}/g" \
+       -e "s/^(tv_autorecord) .*/\1 ${TV_AUTORECORD}/g" \
+       -e "s/^(tv_password) .*/\1 ${TV_PW}/g" \
+       -e "s/^(tv_relaypassword) .*/\1 ${TV_RELAY_PW}/g" \
+       -e "s/^(tv_maxrate) .*/\1 ${TV_MAXRATE}/g" \
+       -e "s/^(tv_delay) .*/\1 ${TV_DELAY}/g" \
+       -e "s/^(tv_name) .*/\1 ${CS2_SERVERNAME} CSTV/g" \
+       -e "s/^(tv_title) .*/\1${CS2_SERVERNAME} CSTV/g" \
        "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 
 if [[ ! -z $CS2_BOT_DIFFICULTY ]] ; then
