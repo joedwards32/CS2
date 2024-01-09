@@ -50,13 +50,13 @@ sed -r -i -e "s/^(hostname) .*/\1 ${CS2_SERVERNAME}/g" \
        "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 
 if [[ ! -z $CS2_BOT_DIFFICULTY ]] ; then
-    sed -i "s/bot_difficulty.*/bot_difficulty ${CS2_BOT_DIFFICULTY}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
+    sed -r -i "s/^(bot_difficulty) .*/\1 ${CS2_BOT_DIFFICULTY}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
 fi
 if [[ ! -z $CS2_BOT_QUOTA ]] ; then
-    sed -i "s/bot_quota.*/bot_quota ${CS2_BOT_QUOTA}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
+    sed -r -i "s/^(bot_quota) .*/\1 ${CS2_BOT_QUOTA}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
 fi
 if [[ ! -z $CS2_BOT_QUOTA_MODE ]] ; then
-    sed -i "s/bot_quota_mode.*/bot_quota_mode ${CS2_BOT_QUOTA_MODE}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
+    sed -r -i "s/^(bot_quota_mode) .*/\1 ${CS2_BOT_QUOTA_MODE}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
 fi
 
 # Switch to server directory
