@@ -62,6 +62,10 @@ ENV CS2_SERVERNAME="cs2 private server" \
     TV_DELAY=0 \
     SRCDS_TOKEN="" \
     CS2_CFG_URL="" \
+    CS2_LOG="on" \
+    CS2_LOG_MONEY=0 \
+    CS2_LOG_DETAIL=0 \
+    CS2_LOG_ITEMS=0 \
     CS2_ADDITIONAL_ARGS=""
 
 # Set permissions on STEAMAPPDIR

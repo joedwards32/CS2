@@ -45,6 +45,10 @@ sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
        -e "s/{{TV_RELAY_PW}}/${TV_RELAY_PW}/g" \
        -e "s/{{TV_MAXRATE}}/${TV_MAXRATE}/g" \
        -e "s/{{TV_DELAY}}/${TV_DELAY}/g" \
+       -e "s/{{SERVER_LOG}}/${CS2_LOG}/g" \
+       -e "s/{{SERVER_LOG_MONEY}}/${CS2_LOG_MONEY}/g" \
+       -e "s/{{SERVER_LOG_DETAIL}}/${CS2_LOG_DETAIL}/g" \
+       -e "s/{{SERVER_LOG_ITEMS}}/${CS2_LOG_ITEMS}/g" \
        "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 
 if [[ ! -z $CS2_BOT_DIFFICULTY ]] ; then
