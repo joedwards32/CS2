@@ -16,6 +16,7 @@ services:
       - CS2_PW=changeme             # (CS2 server password)
       - CS2_MAXPLAYERS=10           # (Max players)
       - CS2_ADDITIONAL_ARGS         # (Optional additional arguments to pass into cs2)
+      - CS2_CFG_URL                 # HTTP/HTTPS URL to fetch a Tar Gzip bundle of configuration files/mods
       # Game modes
       - CS2_GAMEALIAS               # (Game type, e.g. casual, competitive, deathmatch. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
       - CS2_GAMETYPE=0              # (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
@@ -34,8 +35,13 @@ services:
       - TV_RELAY_PW=changeme        # CSTV password for relay proxies
       - TV_MAXRATE=0                # World snapshots to broadcast per second. Affects camera tickrate.
       - TV_DELAY=0                  # Max CSTV spectator bandwidth rate allowed, 0 == unlimited
+      # Logs
+      - CS2_LOG=on                  # 'on'/'off'
+      - CS2_LOG_MONEY=0             # Turns money logging on/off: (0=off, 1=on)
+      - CS2_LOG_DETAIL=0            # Combat damage logging: (0=disabled, 1=enemy, 2=friendly, 3=all)
+      - CS2_LOG_ITEMS=0             # Turns item logging on/off: (0=off, 1=on)
     volumes:
-      - cs2:/home/steam/cs2-dedicated/  # (Change /mnt/cs2 according to your volume location)
+      - cs2:/home/steam/cs2-dedicated/  # Persistent data volume mount point inside container
     ports:
       - "27015:27015/tcp"           # TCP
       - "27015:27015/udp"           # UDP

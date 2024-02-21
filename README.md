@@ -99,6 +99,15 @@ TV_MAXRATE=0                (Max CSTV spectator bandwidth rate allowed, 0 == unl
 TV_DELAY=0                  (CSTV broadcast delay in seconds)
 ```
 
+### Logs
+
+```dockerfile
+CS2_LOG="on"                ('on'/'off')
+CS2_LOG_MONEY=0             (Turns money logging on/off: 0=off, 1=on)
+CS2_LOG_DETAIL=0            (Combat damage logging: 0=disabled, 1=enemy, 2=friendly, 3=all)
+CS2_LOG_ITEMS=0             (Turns item logging on/off: 0=off, 1=on)
+```
+
 # Customizing this Container
 
 ## Pre and Post Hooks
