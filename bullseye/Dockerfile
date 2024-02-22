@@ -11,6 +11,7 @@ LABEL maintainer="joedwards32@gmail.com"
 ENV STEAMAPPID 730
 ENV STEAMAPP cs2
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
+ENV STEAMAPPVALIDATE 0
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/server.cfg "/etc/server.cfg"

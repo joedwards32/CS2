@@ -5,9 +5,15 @@ mkdir -p "${STEAMAPPDIR}" || true
 
 # Download Updates
 
+if [[ "$STEAMAPPVALIDATE" -eq 1 ]]; then
+    VALIDATE="validate"
+else
+    VALIDATE=""
+fi
+
 bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" \
 				+login anonymous \
-				+app_update "${STEAMAPPID}" \
+				+app_update "${STEAMAPPID}" "${VALIDATE}"\
 				+quit
 
 # steamclient.so fix

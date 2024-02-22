@@ -6,6 +6,7 @@ services:
     environment:
       # Server configuration
       - SRCDS_TOKEN                 # Game Server Token from https://steamcommunity.com/dev/managegameservers
+      - STEAMAPPVALIDATE=0          # (0 - no validation, 1 - enable validation)
       - CS2_SERVERNAME=changeme     # (Set the visible name for your private server)
       - CS2_CHEATS=0                # (0 - disable cheats, 1 - enable cheats)
       - CS2_PORT=27015              # (CS2 server listen port tcp_udp)
