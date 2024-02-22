@@ -110,6 +110,14 @@ CS2_LOG_ITEMS=0             (Turns item logging on/off: 0=off, 1=on)
 
 # Customizing this Container
 
+## Validating Game Files
+
+If you break the game through your customisations and want steamcmd to validate and redownload then set the `STEAMAPPVALIDATE` environment variable to `1`:
+
+```dockerfile
+STEAMAPPVALIDATE=0          (0=skip validation, 1=validate game files)
+```
+
 ## Pre and Post Hooks
 
 The container includes two scripts for executing custom actions:
