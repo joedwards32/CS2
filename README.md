@@ -129,7 +129,7 @@ When using a persient volume mounted at `/home/steam/cs2-dedicated/` you may edi
 
 ## Overriding Game Mode Defaults
 
-The default configurations for each game mode are stored in `/home/steam/cs2-dedicated/csgo/cfg/`. For example, the Competitive mode defaults are set by `gamemode_competitive.cfg`.
+The default configurations for each game mode are stored in `/home/steam/cs2-dedicated/game/csgo/cfg/`. For example, the Competitive mode defaults are set by `gamemode_competitive.cfg`.
 
 When using a persistent volume mounted at `/home/steam/cs2-dedicated/`, these defaults can be overridden by adding your own settings to `gamemode_competitive_server.cfg`.
 
