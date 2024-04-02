@@ -1,51 +1,51 @@
-version: '3.7'
-services:
-  cs2-server:
+x-cs2-common: &cs2-common
     image: joedwards32/cs2
     container_name: cs2-dedicated
     environment:
-      # Server configuration
-      - SRCDS_TOKEN                 # Game Server Token from https://steamcommunity.com/dev/managegameservers
+      # - SRCDS_TOKEN                 # Game Server Token from https://steamcommunity.com/dev/managegameservers, optional for LAN
       - STEAMAPPVALIDATE=0          # (0 - no validation, 1 - enable validation)
-      - CS2_SERVERNAME=changeme     # (Set the visible name for your private server)
       - CS2_CHEATS=0                # (0 - disable cheats, 1 - enable cheats)
       - CS2_PORT=27015              # (CS2 server listen port tcp_udp)
       - CS2_SERVER_HIBERNATE=0      # (Put server in a low CPU state when there are no players. 0 - hibernation disabled, 1 - hibernation enabled)
-      - CS2_RCON_PORT               # (Optional, use a simple TCP proxy to have RCON listen on an alternative port. Useful for services like AWS Fargate which do not support mixed protocol ports.)
       - CS2_LAN=0                   # (0 - LAN mode disabled, 1 - LAN Mode enabled)
       - CS2_RCONPW=changeme         # (RCON password)
       - CS2_PW=changeme             # (CS2 server password)
       - CS2_MAXPLAYERS=10           # (Max players)
-      - CS2_ADDITIONAL_ARGS         # (Optional additional arguments to pass into cs2)
-      - CS2_CFG_URL                 # HTTP/HTTPS URL to fetch a Tar Gzip bundle of configuration files/mods
-      # Game modes
-      - CS2_GAMEALIAS               # (Game type, e.g. casual, competitive, deathmatch. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
+      # - CS2_ADDITIONAL_ARGS         # (Optional additional arguments to pass into cs2)
+      # - CS2_CFG_URL                 # HTTP/HTTPS URL to fetch a Tar Gzip bundle of configuration files/mods
+      # - CS2_GAMEALIAS               # (Game type, e.g. casual, competitive, deathmatch. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
       - CS2_GAMETYPE=0              # (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
       - CS2_GAMEMODE=1              # (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
       - CS2_MAPGROUP=mg_active      # (Map pool)
       - CS2_STARTMAP=de_inferno     # (Start map)
-      # Bots
-      - CS2_BOT_DIFFICULTY          # (0 - easy, 1 - normal, 2 - hard, 3 - expert)
-      - CS2_BOT_QUOTA               # (Number of bots)
-      - CS2_BOT_QUOTA_MODE          # (fill, competitive)
-      # TV
-      - TV_AUTORECORD=0             # Automatically records all games as CSTV demos: 0=off, 1=on.
-      - TV_ENABLE=0                 # Activates CSTV on server: 0=off, 1=on.
-      - TV_PORT=27020               # Host SourceTV port
-      - TV_PW=changeme              # CSTV password for clients
-      - TV_RELAY_PW=changeme        # CSTV password for relay proxies
-      - TV_MAXRATE=0                # World snapshots to broadcast per second. Affects camera tickrate.
-      - TV_DELAY=0                  # Max CSTV spectator bandwidth rate allowed, 0 == unlimited
-      # Logs
-      - CS2_LOG=on                  # 'on'/'off'
-      - CS2_LOG_MONEY=0             # Turns money logging on/off: (0=off, 1=on)
-      - CS2_LOG_DETAIL=0            # Combat damage logging: (0=disabled, 1=enemy, 2=friendly, 3=all)
-      - CS2_LOG_ITEMS=0             # Turns item logging on/off: (0=off, 1=on)
+      # - CS2_BOT_DIFFICULTY          # (0 - easy, 1 - normal, 2 - hard, 3 - expert)
+      # - CS2_BOT_QUOTA               # (Number of bots)
+      # - CS2_BOT_QUOTA_MODE          # (fill, competitive)
     volumes:
-      - cs2:/home/steam/cs2-dedicated/  # Persistent data volume mount point inside container
+      - cs2:/home/steam/cs2-dedicated/  # Persistent data volume mount point inside container, can be reused
     ports:
-      - "27015:27015/tcp"           # TCP
-      - "27015:27015/udp"           # UDP
-      - "27020:27020/udp"           # UDP
+      - "27015:27015"
+
+services:
+  cs1:
+    <<: *cs2-common
+    environment:
+      CS2_SERVERNAME=cs1
+
+  cs2:
+    <<: *cs2-common
+    environment:
+      CS2_SERVERNAME=cs2
+
+  cs3:
+    <<: *cs2-common
+    environment:
+      CS2_SERVERNAME=cs3
+
+  cs4:
+    <<: *cs2-common
+    environment:
+      CS2_SERVERNAME=cs4
+
 volumes:
   cs2:
