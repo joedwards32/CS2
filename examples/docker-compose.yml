@@ -47,5 +47,7 @@ services:
       - "27015:27015/tcp"           # TCP
       - "27015:27015/udp"           # UDP
       - "27020:27020/udp"           # UDP
+    stdin_open: true # Add local console for docker attach, docker attach --sig-proxy=false cs2-dedicated
+    tty: true # Add local console for docker attach, docker attach --sig-proxy=false cs2-dedicated
 volumes:
   cs2:
