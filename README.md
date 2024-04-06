@@ -13,14 +13,16 @@ This Docker image contains the dedicated server of the game.
 
 Running using Docker:
 ```console
-$ docker run -d --name=cs2 -e SRCDS_TOKEN={YOURTOKEN} -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
+$ SRCDS_TOKEN="..." # check https://steamcommunity.com/dev/managegameservers
+$ docker run -d --name=cs2 -e SRCDS_TOKEN="$SRCDS_TOKEN" -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp joedwards32/cs2
 ```
 
 Running using a bind mount for data persistence on container recreation:
 ```console
 $ mkdir -p $(pwd)/cs2-data
-$ chmod 777 $(pwd)/cs2-data # Makes sure the directory is writeable by the unprivileged container user
-$ docker run -d --name=cs2 -e SRCDS_TOKEN={YOURTOKEN} -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/tcp joedwards32/cs2
+$ chown 1000:1000 $(pwd)/cs2-data # Makes sure the directory is writeable by the unprivileged container user with uid 1000, known as steam
+$ SRCDS_TOKEN="..." # check https://steamcommunity.com/dev/managegameservers
+$ docker run -d --name=cs2 -e SRCDS_TOKEN="$SRCDS_TOKEN" -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp joedwards32/cs2
 ```
 
 or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/main/examples/docker-compose.yml):
