@@ -113,9 +113,6 @@ eval "./cs2" -dedicated \
         "${SV_SETSTEAMACCOUNT_ARGS}" \
         +sv_password "${CS2_PW}" \
         +sv_lan "${CS2_LAN}" \
-        +sv_downloadurl "${CS2_FASTDL_URL}" \
-        +sv_allowdownload "${CS2_FASTDL_ALLOW_DOWNLOAD}" \
-        +sv_allowupload "${CS2_FASTDL_ALLOW_UPLOAD}" \
         +host_workshop_map "${CS2_HOST_WORKSHOP_MAP}"\
         +host_workshop_collection "${CS2_HOST_WORKSHOP_COLLECTION}"\
         "${CS2_ADDITIONAL_ARGS}"
