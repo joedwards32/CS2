@@ -24,6 +24,8 @@ services:
       - CS2_GAMEMODE=1              # (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
       - CS2_MAPGROUP=mg_active      # (Map pool)
       - CS2_STARTMAP=de_inferno     # (Start map)
+      - CS2_HOST_WORKSHOP_MAP       # Specify workshop map id
+      - CS2_HOST_WORKSHOP_COLLECTION # Specify workshop collection id
       # Bots
       - CS2_BOT_DIFFICULTY          # (0 - easy, 1 - normal, 2 - hard, 3 - expert)
       - CS2_BOT_QUOTA               # (Number of bots)
@@ -47,7 +49,7 @@ services:
       - "27015:27015/tcp"           # TCP
       - "27015:27015/udp"           # UDP
       - "27020:27020/udp"           # UDP
-    stdin_open: true # Add local console for docker attach, docker attach --sig-proxy=false cs2-dedicated
-    tty: true # Add local console for docker attach, docker attach --sig-proxy=false cs2-dedicated
+    stdin_open: true                # Add local console for docker attach, docker attach --sig-proxy=false cs2-dedicated
+    tty: true                       # Add local console for docker attach, docker attach --sig-proxy=false cs2-dedicated
 volumes:
   cs2:
