@@ -35,7 +35,7 @@ services:
       - TV_PW=changeme              # CSTV password for clients
       - TV_RELAY_PW=changeme        # CSTV password for relay proxies
       - TV_MAXRATE=0                # World snapshots to broadcast per second. Affects camera tickrate.
-      - TV_DELAY=0                  # Max CSTV spectator bandwidth rate allowed, 0 == unlimited
+      - TV_DELAY=0                  # CSTV broadcast delay in seconds
       # Logs
       - CS2_LOG=on                  # 'on'/'off'
       - CS2_LOG_MONEY=0             # Turns money logging on/off: (0=off, 1=on)
