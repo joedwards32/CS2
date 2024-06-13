@@ -71,7 +71,7 @@ fi
 cd "${STEAMAPPDIR}/game/bin/linuxsteamrt64"
 
 # Pre Hook
-bash "${STEAMAPPDIR}/pre.sh"
+source "${STEAMAPPDIR}/pre.sh"
 
 # Construct server arguments
 
@@ -116,4 +116,4 @@ eval "./cs2" -dedicated \
         "${CS2_ADDITIONAL_ARGS}"
 
 # Post Hook
-bash "${STEAMAPPDIR}/post.sh"
+source "${STEAMAPPDIR}/post.sh"
