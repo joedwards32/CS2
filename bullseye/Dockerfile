@@ -28,6 +28,7 @@ RUN set -x \
                 simpleproxy \
                 libicu-dev \
                 unzip \
+		jq \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	# Add entry script
 	&& chmod +x "${HOMEDIR}/entry.sh" \
