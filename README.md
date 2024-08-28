@@ -129,6 +129,12 @@ The container includes two scripts for executing custom actions:
 
 When using a persient volume mounted at `/home/steam/cs2-dedicated/` you may edit these scripts to perform custom actions, such as enabling metamod.
 
+Alternatively, you may have docker mount files from outside the container to override these files. E.g.:
+
+```
+-v /path/to/pre.sh:/home/steam/cs2-dedicated/pre.sh
+```
+
 ## Overriding Game Mode Defaults
 
 The default configurations for each game mode are stored in `/home/steam/cs2-dedicated/game/csgo/cfg/`. For example, the Competitive mode defaults are set by `gamemode_competitive.cfg`.
