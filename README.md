@@ -77,8 +77,8 @@ CS2_GAMEALIAS=""            (Game type, e.g. casual, competitive, deathmatch.
                              See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
 CS2_GAMETYPE=0              (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
 CS2_GAMEMODE=1              (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
-CS2_MAPGROUP="mg_active"    (Map pool)
-CS2_STARTMAP="de_inferno"   (Start map)
+CS2_MAPGROUP="mg_active"    (Map pool. Ignored if workshop maps are defined.)
+CS2_STARTMAP="de_inferno"   (Start map. Ignored if workshop maps are defined.)
 ```
 
 ### Bots
