@@ -110,6 +110,22 @@ CS2_LOG_DETAIL=0            (Combat damage logging: 0=disabled, 1=enemy, 2=frien
 CS2_LOG_ITEMS=0             (Turns item logging on/off: 0=off, 1=on)
 ```
 
+### Steam Workshop
+
+Support for Steam Workshop is experimental!
+
+```dockerfile
+CS2_HOST_WORKSHOP_MAP=""         (Steam Workshop Map ID to load on server start)   
+CS2_HOST_WORKSHOP_COLLECTION=""  (Steam Workshop Collection ID to download)
+```
+
+If a Workshop Collection is set, maps can be selected via rcon. E.g:
+
+```
+ds_workshop_listmaps
+ds_workshop_changelevel $map_name
+```
+
 # Customizing this Container
 
 ## Validating Game Files
