@@ -93,6 +93,22 @@ if [[ ! -z $SRCDS_TOKEN ]]; then
     SV_SETSTEAMACCOUNT_ARGS="+sv_setsteamaccount ${SRCDS_TOKEN}"
 fi
 
+if [[ ! -z $CS2_HOST_WORKSHOP_COLLECTION ]] || [[ ! -z $CS2_HOST_WORKSHOP_MAP ]]; then
+    CS2_MP_MATCH_END_CHANGELEVEL="+mp_match_end_changelevel true"   # https://github.com/joedwards32/CS2/issues/57#issuecomment-2245595368
+    CS2_STARTMAP="\<empty\>"                                        # https://github.com/joedwards32/CS2/issues/57#issuecomment-2245595368
+    CS2_MAPGROUP_ARGS=
+else
+    CS2_MAPGROUP_ARGS="+mapgroup ${CS2_MAPGROUP}"
+fi
+
+if [[ ! -z $CS2_HOST_WORKSHOP_COLLECTION ]]; then
+    CS2_HOST_WORKSHOP_COLLECTION_ARGS="+host_workshop_collection ${CS2_HOST_WORKSHOP_COLLECTION}"
+fi
+
+if [[ ! -z $CS2_HOST_WORKSHOP_MAP ]]; then
+    CS2_HOST_WORKSHOP_MAP_ARGS="+host_workshop_map ${CS2_HOST_WORKSHOP_MAP}"
+fi
+
 # Start Server
 
 if [[ ! -z $CS2_RCON_PORT ]]; then
@@ -107,8 +123,11 @@ eval "./cs2" -dedicated \
         -usercon \
         -maxplayers "${CS2_MAXPLAYERS}" \
         "${CS2_GAME_MODE_ARGS}" \
-        +mapgroup "${CS2_MAPGROUP}" \
+        "${CS2_MAPGROUP_ARGS}" \
         +map "${CS2_STARTMAP}" \
+        "${CS2_HOST_WORKSHOP_COLLECTION_ARGS}" \
+        "${CS2_HOST_WORKSHOP_MAP_ARGS}" \
+        "${CS2_MP_MATCH_END_CHANGELEVEL}" \
         +rcon_password "${CS2_RCONPW}" \
         "${SV_SETSTEAMACCOUNT_ARGS}" \
         +sv_password "${CS2_PW}" \

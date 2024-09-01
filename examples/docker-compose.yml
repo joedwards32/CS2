@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   cs2-server:
     image: joedwards32/cs2
@@ -22,8 +21,11 @@ services:
       - CS2_GAMEALIAS               # (Game type, e.g. casual, competitive, deathmatch. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
       - CS2_GAMETYPE=0              # (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
       - CS2_GAMEMODE=1              # (Used if CS2_GAMEALIAS not defined. See https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers)
-      - CS2_MAPGROUP=mg_active      # (Map pool)
-      - CS2_STARTMAP=de_inferno     # (Start map)
+      - CS2_MAPGROUP=mg_active      # (Map pool. Ignored if Workshop maps are defined.)
+      - CS2_STARTMAP=de_inferno     # (Start map. Ignored if Workshop maps are defined.)
+      # Workshop Maps
+      - CS2_HOST_WORKSHOP_COLLECTION # The workshop collection to use
+      - CS2_HOST_WORKSHOP_MAP        # The workshop map to use. If collection is also defined, this is the starting map.
       # Bots
       - CS2_BOT_DIFFICULTY          # (0 - easy, 1 - normal, 2 - hard, 3 - expert)
       - CS2_BOT_QUOTA               # (Number of bots)
