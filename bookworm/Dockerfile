@@ -4,7 +4,7 @@
 
 # BUILD STAGE
 
-FROM cm2network/steamcmd:root as build_stage
+FROM cm2network/steamcmd:root-bookworm as build_stage
 
 LABEL maintainer="joedwards32@gmail.com"
 
@@ -39,7 +39,7 @@ RUN set -x \
 
 # BASE
 
-FROM build_stage AS bullseye-base
+FROM build_stage AS bookworm-base
 
 ENV CS2_SERVERNAME="cs2 private server" \
     CS2_CHEATS=0 \
