@@ -132,6 +132,7 @@ eval "./cs2" -dedicated \
         "${SV_SETSTEAMACCOUNT_ARGS}" \
         +sv_password "${CS2_PW}" \
         +sv_lan "${CS2_LAN}" \
+        +tv_port "${TV_PORT}" \
         "${CS2_ADDITIONAL_ARGS}"
 
 # Post Hook
