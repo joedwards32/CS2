@@ -21,6 +21,7 @@ mkdir -p ~/.steam/sdk64
 ln -sfT ${STEAMCMDDIR}/linux64/steamclient.so ~/.steam/sdk64/steamclient.so
 
 # Install server.cfg
+mkdir -p $STEAMAPPDIR/game/csgo/cfg
 cp /etc/server.cfg "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
 
 # Install hooks if they don't already exist
