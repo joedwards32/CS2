@@ -165,13 +165,13 @@ mp_maxrounds	16	// Shorter games
 
 ## Customisation Bundle
 
-The container can be instructed to download a extract a Tar Gzip of configuration files and other customisations from a given URL.
+The container can be instructed to download a extract a Tar Gzip bundle, Tar or Zip archive of configuration files and other customisations from a given URL.
 
 ```dockerfile
-CS2_CFG_URL=""          (HTTP/HTTPS URL to fetch a Tar Gzip bundle of configuration files/mods)
+CS2_CFG_URL=""          (HTTP/HTTPS URL to fetch a Tar Gzip bundle, Tar or Zip archive of configuration files/mods)
 ```
 
-See [examples](https://github.com/joedwards32/CS2/blob/main/examples/cs2.cfg.tgz) for a correctly formatted Tar Gzip customisation bundle.
+See [examples](https://github.com/joedwards32/CS2/blob/main/examples/cs2.cfg.tgz) for a correctly formatted Tar Gzip customisation bundle, the same format applies to all archive types.
 
 
 # Credits
