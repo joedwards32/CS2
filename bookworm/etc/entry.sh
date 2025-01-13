@@ -35,7 +35,32 @@ fi
 # Download and extract custom config bundle
 if [[ ! -z $CS2_CFG_URL ]]; then
     echo "Downloading config pack from ${CS2_CFG_URL}"
-    wget -qO- "${CS2_CFG_URL}" | tar xvzf - -C "${STEAMAPPDIR}"
+    
+    TEMP_DIR=$(mktemp -d)
+    TEMP_FILE="${TEMP_DIR}/$(basename ${CS2_CFG_URL})"
+    wget -qO "${TEMP_FILE}" "${CS2_CFG_URL}"
+
+    case "${TEMP_FILE}" in
+        *.zip)
+            echo "Extracting ZIP file..."
+            unzip -q "${TEMP_FILE}" -d "${STEAMAPPDIR}"
+            ;;
+        *.tar.gz | *.tgz)
+            echo "Extracting TAR.GZ or TGZ file..."
+            tar xvzf "${TEMP_FILE}" -C "${STEAMAPPDIR}"
+            ;;
+        *.tar)
+            echo "Extracting TAR file..."
+            tar xvf "${TEMP_FILE}" -C "${STEAMAPPDIR}"
+            ;;
+        *)
+            echo "Unsupported file type"
+            rm -rf "${TEMP_DIR}"
+            exit 1
+            ;;
+    esac
+
+    rm -rf "${TEMP_DIR}"
 fi
 
 # Rewrite Config Files
