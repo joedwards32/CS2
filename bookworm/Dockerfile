@@ -49,7 +49,6 @@ ENV CS2_SERVERNAME="cs2 private server" \
     CS2_RCON_PORT="" \
     CS2_MAXPLAYERS=10 \
     CS2_RCONPW="changeme" \
-    CS2_PW="changeme" \
     CS2_MAPGROUP="mg_active" \    
     CS2_STARTMAP="de_inferno" \
     CS2_GAMEALIAS="" \

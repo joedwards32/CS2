@@ -63,7 +63,7 @@ CS2_RCON_PORT=""            (Optional, use a simple TCP proxy to have RCON liste
                              Useful for services like AWS Fargate which do not support mixed protocol ports.)
 CS2_LAN="0"                 (0 - LAN mode disabled, 1 - LAN Mode enabled)
 CS2_RCONPW="changeme"       (RCON password)
-CS2_PW="changeme"           (CS2 server password)
+CS2_PW=""                   (Optional, CS2 server password)
 CS2_MAXPLAYERS=10           (Max players)
 CS2_ADDITIONAL_ARGS=""      (Optional additional arguments to pass into cs2)
 ```
