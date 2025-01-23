@@ -35,7 +35,7 @@ fi
 # Download and extract custom config bundle
 if [[ ! -z $CS2_CFG_URL ]]; then
     echo "Downloading config pack from ${CS2_CFG_URL}"
-    
+
     TEMP_DIR=$(mktemp -d)
     TEMP_FILE="${TEMP_DIR}/$(basename ${CS2_CFG_URL})"
     wget -qO "${TEMP_FILE}" "${CS2_CFG_URL}"
@@ -135,6 +135,10 @@ if [[ ! -z $CS2_HOST_WORKSHOP_MAP ]]; then
     CS2_HOST_WORKSHOP_MAP_ARGS="+host_workshop_map ${CS2_HOST_WORKSHOP_MAP}"
 fi
 
+if [[ ! -z $CS2_PW ]]; then
+    CS2_PW_ARGS="+sv_password ${CS2_PW}"
+fi
+
 # Start Server
 
 if [[ ! -z $CS2_RCON_PORT ]]; then
@@ -156,7 +160,7 @@ eval "./cs2" -dedicated \
         "${CS2_MP_MATCH_END_CHANGELEVEL}" \
         +rcon_password "${CS2_RCONPW}" \
         "${SV_SETSTEAMACCOUNT_ARGS}" \
-        +sv_password "${CS2_PW}" \
+        "${CS2_PW_ARGS}" \
         +sv_lan "${CS2_LAN}" \
         +tv_port "${TV_PORT}" \
         "${CS2_ADDITIONAL_ARGS}"
