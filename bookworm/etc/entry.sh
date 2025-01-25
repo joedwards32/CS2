@@ -12,6 +12,7 @@ else
 fi
 
 eval bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" \
+                                +@bClientTryRequestManifestWithoutCode 1 \
 				+login anonymous \
 				+app_update "${STEAMAPPID}" "${VALIDATE}"\
 				+quit
