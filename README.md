@@ -128,6 +128,14 @@ ds_workshop_changelevel $map_name
 
 # Customizing this Container
 
+## Debug Logging
+
+If you want to increase the verbosity of log output set the `DEBUG` environment variable:
+
+```dockerfile
+DEBUG=0                    (0=none, 1=steamcmd, 2=cs2, 3=all)
+```
+
 ## Validating Game Files
 
 If you break the game through your customisations and want steamcmd to validate and redownload then set the `STEAMAPPVALIDATE` environment variable to `1`:
