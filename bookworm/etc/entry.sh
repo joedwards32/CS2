@@ -1,17 +1,31 @@
 #!/bin/bash
 
+# Debug
+
+## Steamcmd debugging
+if [[ $DEBUG -eq 1 ]] || [[ $DEBUG -eq 3 ]]; then
+    STEAMCMD_SPEW="+set_spew_level 4 4"
+fi
+## CS2 server debugging
+if [[ $DEBUG -eq 2 ]] || [[ $DEBUG -eq 3 ]]; then
+    CS2_LOG="on"
+    CS2_LOG_MONEY=1
+    CS2_LOG_DETAIL=3
+    CS2_LOG_ITEMS=1
+fi
+
 # Create App Dir
 mkdir -p "${STEAMAPPDIR}" || true
 
 # Download Updates
-
 if [[ "$STEAMAPPVALIDATE" -eq 1 ]]; then
     VALIDATE="validate"
 else
     VALIDATE=""
 fi
 
-eval bash "${STEAMCMDDIR}/steamcmd.sh" +force_install_dir "${STEAMAPPDIR}" \
+eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
+                                +force_install_dir "${STEAMAPPDIR}" \
                                 +@bClientTryRequestManifestWithoutCode 1 \
 				+login anonymous \
 				+app_update "${STEAMAPPID}" "${VALIDATE}"\
