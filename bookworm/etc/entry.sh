@@ -29,7 +29,7 @@ eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
                                 +@bClientTryRequestManifestWithoutCode 1 \
 				+login anonymous \
 				+app_update "${STEAMAPPID}" "${VALIDATE}"\
-				+quit
+				+quit || exit $?
 
 # steamclient.so fix
 mkdir -p ~/.steam/sdk64
