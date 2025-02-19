@@ -24,12 +24,32 @@ else
     VALIDATE=""
 fi
 
-eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
+## SteamCMD can fail to download
+## Retry logic
+MAX_ATTEMPTS=3
+attempt=0
+while [[ $steamcmd_rc != 0 ]] && [[ $attempt -lt $MAX_ATTEMPTS ]]; do
+    ((attempt+=1))
+    if [[ $attempt -gt 1 ]]; then
+        echo "Retrying SteamCMD, attempt ${attempt}"
+        # Stale appmanifest data can lead for HTTP 401 errors when requesting old
+        # files from SteamPipe CDN
+        echo "Removing steamapps (appmanifest data)..."
+        rm -rf "${STEAMAPPDIR}/steamapps"
+    fi
+    eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
                                 +force_install_dir "${STEAMAPPDIR}" \
                                 +@bClientTryRequestManifestWithoutCode 1 \
 				+login anonymous \
 				+app_update "${STEAMAPPID}" "${VALIDATE}"\
-				+quit || exit $?
+				+quit
+    steamcmd_rc=$?
+done
+
+## Exit if steamcmd fails
+if [[ $steamcmd_rc != 0 ]]; then
+    exit $steamcmd_rc
+fi
 
 # steamclient.so fix
 mkdir -p ~/.steam/sdk64
