@@ -7,7 +7,7 @@ services:
       - SRCDS_TOKEN                 # Game Server Token from https://steamcommunity.com/dev/managegameservers
       - DEBUG=0                     # (0 - off, 1 - steamcmd, 2 - cs2, 3 - all)
       - STEAMAPPVALIDATE=0          # (0 - no validation, 1 - enable validation)
-      - CS2_SERVERNAME=changeme     # (Set the visible name for your private server)
+      - CS2_SERVERNAME=changeme     # (Set the visible name for your private server. DO NOT USE "/" in your server name!)
       - CS2_CHEATS=0                # (0 - disable cheats, 1 - enable cheats)
       - CS2_PORT=27015              # (CS2 server listen port tcp_udp)
       - CS2_SERVER_HIBERNATE=0      # (Put server in a low CPU state when there are no players. 0 - hibernation disabled, 1 - hibernation enabled)
