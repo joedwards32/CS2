@@ -46,13 +46,15 @@ Minimum system requirements are:
 * 40GB of disk space for the container or mounted as a persistent volume on `/home/steam/cs2-dedicated/`
 
 ## Environment Variables
-Feel free to overwrite these environment variables, using -e (--env): 
+Feel free to overwrite these environment variables, using -e (--env):
+
+**Note:** `/` characters in Counter-Strike-related environment variables **must be escaped** as `\/` (e. g. `CS2_SERVERNAME="My Server 1\/3` will result in `My Server 1/3` in-game). Otherwise, this may cause unexpected behavior during configuration processing 
 
 ### Server Configuration
 
 ```dockerfile
 SRCDS_TOKEN=""              (Game Server Token from https://steamcommunity.com/dev/managegameservers)
-CS2_SERVERNAME="changeme"   (Set the visible name for your private server. DO NOT USE "/" in your server name!)
+CS2_SERVERNAME="changeme"   (Set the visible name for your private server.)
 CS2_CHEATS=0                (0 - disable cheats, 1 - enable cheats)
 CS2_SERVER_HIBERNATE=0      (Put server in a low CPU state when there are no players. 
                              0 - hibernation disabled, 1 - hibernation enabled
