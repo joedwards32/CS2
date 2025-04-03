@@ -31,7 +31,7 @@ or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/
 $ docker compose --file examples/docker-compose.yml up -d cs2-server
 ```
 
-You must have at least **40GB** of free disk space! See [System Requirements](./#system-requirements).
+You must have at least **50GB** of free disk space! See [System Requirements](./#system-requirements).
 
 **The container will automatically update the game on startup, so if there is a game update just restart the container.**
 
@@ -43,7 +43,7 @@ Minimum system requirements are:
 
 * 2 CPUs
 * 2GiB RAM
-* 40GB of disk space for the container or mounted as a persistent volume on `/home/steam/cs2-dedicated/`
+* 50GB of disk space for the container or mounted as a persistent volume on `/home/steam/cs2-dedicated/`
 
 ## Environment Variables
 Feel free to overwrite these environment variables, using -e (--env):
