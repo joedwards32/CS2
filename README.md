@@ -44,6 +44,7 @@ Minimum system requirements are:
 * 2 CPUs
 * 2GiB RAM
 * 50GB of disk space for the container or mounted as a persistent volume on `/home/steam/cs2-dedicated/`
+  * Note: More space may be required if you plan to install mods
 
 ## Environment Variables
 Feel free to overwrite these environment variables, using -e (--env):
