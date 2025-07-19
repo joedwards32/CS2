@@ -78,7 +78,7 @@ if [[ ! -z $CS2_CFG_URL ]]; then
     case "${TEMP_FILE}" in
         *.zip)
             echo "Extracting ZIP file..."
-            unzip -q "${TEMP_FILE}" -d "${STEAMAPPDIR}"
+            unzip -o -q "${TEMP_FILE}" -d "${STEAMAPPDIR}"
             ;;
         *.tar.gz | *.tgz)
             echo "Extracting TAR.GZ or TGZ file..."
