@@ -2,9 +2,9 @@
 
 # Debug
 
-## Steamcmd debugging
+## Depot Downloader debugging
 if [[ $DEBUG -eq 1 ]] || [[ $DEBUG -eq 3 ]]; then
-    STEAMCMD_SPEW="+set_spew_level 4 4"
+    DD_LOG="-debug"
 fi
 ## CS2 server debugging
 if [[ $DEBUG -eq 2 ]] || [[ $DEBUG -eq 3 ]]; then
@@ -19,36 +19,18 @@ mkdir -p "${STEAMAPPDIR}" || true
 
 # Download Updates
 if [[ "$STEAMAPPVALIDATE" -eq 1 ]]; then
-    VALIDATE="validate"
+    VALIDATE="-validate"
 else
     VALIDATE=""
 fi
 
-## SteamCMD can fail to download
-## Retry logic
-MAX_ATTEMPTS=3
-attempt=0
-while [[ $steamcmd_rc != 0 ]] && [[ $attempt -lt $MAX_ATTEMPTS ]]; do
-    ((attempt+=1))
-    if [[ $attempt -gt 1 ]]; then
-        echo "Retrying SteamCMD, attempt ${attempt}"
-        # Stale appmanifest data can lead for HTTP 401 errors when requesting old
-        # files from SteamPipe CDN
-        echo "Removing steamapps (appmanifest data)..."
-        rm -rf "${STEAMAPPDIR}/steamapps"
-    fi
-    eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
-                                +force_install_dir "${STEAMAPPDIR}" \
-                                +@bClientTryRequestManifestWithoutCode 1 \
-				+login anonymous \
-				+app_update "${STEAMAPPID}" "${VALIDATE}"\
-				+quit
-    steamcmd_rc=$?
-done
+## Depot Downloader
+eval "${HOMEDIR}/DepotDownloader" -app "${STEAMAPPID}" -filelist /etc/filter.txt -dir "${STEAMAPPDIR}" "${VALIDATE}"
+ddcmd_rc=$?
 
-## Exit if steamcmd fails
-if [[ $steamcmd_rc != 0 ]]; then
-    exit $steamcmd_rc
+## Exit if Depot Downloader fails
+if [[ $ddcmd_rc != 0 ]]; then
+    exit $ddcmd_rc
 fi
 
 # steamclient.so fix
@@ -182,6 +164,7 @@ if [[ ! -z $CS2_RCON_PORT ]]; then
 fi
 
 echo "Starting CS2 Dedicated Server"
+chmod a+x ./cs2
 eval "./cs2" -dedicated \
         "${CS2_IP_ARGS}" -port "${CS2_PORT}" \
         -console \

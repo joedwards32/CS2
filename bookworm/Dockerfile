@@ -8,6 +8,7 @@ FROM cm2network/steamcmd:root-bookworm as build_stage
 
 LABEL maintainer="joedwards32@gmail.com"
 
+ENV DEPOTDOWNLOADER_URL "https://github.com/SteamRE/DepotDownloader/releases/latest/download/DepotDownloader-linux-x64.zip"
 ENV STEAMAPPID 730
 ENV STEAMAPP cs2
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
@@ -17,6 +18,8 @@ COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/server.cfg "/etc/server.cfg"
 COPY etc/pre.sh "/etc/pre.sh"
 COPY etc/post.sh "/etc/post.sh"
+# Copy Depot Downloader regex filters
+COPY etc/filter.txt "/etc/filter.txt"
 
 RUN set -x \
 	# Install, update & upgrade packages
@@ -35,7 +38,15 @@ RUN set -x \
 	&& chown -R "${USER}:${USER}" "${HOMEDIR}/entry.sh" "${STEAMAPPDIR}" \
 	# Clean up
         && apt-get clean \
-        && find /var/lib/apt/lists/ -type f -delete
+        && find /var/lib/apt/lists/ -type f -delete \
+        # Install Depot Downloader
+        ## Depot Downloader is GPL-2.0 licensed
+        ## It, like the Debian components of this image, is included under the "Mere Aggregation" clause
+        ## License and Source code available from http://github.com/SteamRE/DepotDownloader/
+        && cd ${HOMEDIR} \
+        && wget -q -O dd.zip ${DEPOTDOWNLOADER_URL} \
+        && unzip dd.zip \
+        && rm dd.zip
 
 # BASE
 

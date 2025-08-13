@@ -1,0 +1,1 @@
+regex:^(?!.*\.(vpk|png|webm)).+$
