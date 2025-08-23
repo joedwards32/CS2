@@ -9,6 +9,12 @@ This Docker image contains the dedicated server of the game.
 <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696011820" alt="logo" width="300"/></img>
 
 # How to use this image
+
+## Available Container Image Repositories
+
+* Docker Hub: `joedwards32/cs2`
+* GitHub: `ghcr.io/joedwards32/cs2`
+
 ## Hosting a simple game server
 
 Running using Docker:
