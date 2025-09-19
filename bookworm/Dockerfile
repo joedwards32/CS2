@@ -12,6 +12,7 @@ ENV STEAMAPPID 730
 ENV STEAMAPP cs2
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 ENV STEAMAPPVALIDATE 0
+ENV LD_LIBRARY_PATH="${STEAMAPPDIR}/bin/linuxsteamrt64:$LD_LIBRARY_PATH"
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/server.cfg "/etc/server.cfg"
