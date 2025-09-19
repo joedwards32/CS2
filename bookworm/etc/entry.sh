@@ -51,9 +51,15 @@ if [[ $steamcmd_rc != 0 ]]; then
     exit $steamcmd_rc
 fi
 
-# steamclient.so fix
+# FIX: steamclient.so fix
 mkdir -p ~/.steam/sdk64
 ln -sfT ${STEAMCMDDIR}/linux64/steamclient.so ~/.steam/sdk64/steamclient.so
+
+# FIX: extend linked library search path to include additional libs provided by valve
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${STEAMAPPDIR}/bin/linuxsteamrt64"
+
+# FIX: map libserver.so to libserver_valve.so
+ln -s ${STEAMAPPDIR}/game/csgo/bin/linuxsteamrt64/libserver.so ${STEAMAPPDIR}/game/bin/linuxsteamrt64/libserver_valve.so
 
 # Install server.cfg
 mkdir -p $STEAMAPPDIR/game/csgo/cfg
