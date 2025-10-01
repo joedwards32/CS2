@@ -55,9 +55,6 @@ fi
 mkdir -p ~/.steam/sdk64
 ln -sfT ${STEAMCMDDIR}/linux64/steamclient.so ~/.steam/sdk64/steamclient.so
 
-# FIX: extend linked library search path to include additional libs provided by valve
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${STEAMAPPDIR}/bin/linuxsteamrt64"
-
 # Install server.cfg
 mkdir -p $STEAMAPPDIR/game/csgo/cfg
 cp /etc/server.cfg "${STEAMAPPDIR}"/game/csgo/cfg/server.cfg
@@ -132,7 +129,7 @@ if [[ ! -z $CS2_BOT_QUOTA_MODE ]] ; then
 fi
 
 # Switch to server directory
-cd "${STEAMAPPDIR}/game/bin/linuxsteamrt64"
+cd "${STEAMAPPDIR}/game/"
 
 # Pre Hook
 source "${STEAMAPPDIR}/pre.sh"
@@ -185,7 +182,7 @@ if [[ ! -z $CS2_RCON_PORT ]]; then
 fi
 
 echo "Starting CS2 Dedicated Server"
-eval "./cs2" -dedicated \
+eval "./cs2.sh" -dedicated \
         "${CS2_IP_ARGS}" -port "${CS2_PORT}" \
         -console \
         -usercon \

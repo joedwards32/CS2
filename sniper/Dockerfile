@@ -4,9 +4,15 @@
 
 # BUILD STAGE
 
-FROM cm2network/steamcmd:root-bookworm as build_stage
+FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform as build_stage
 
 LABEL maintainer="joedwards32@gmail.com"
+
+# TODO - Separate stage
+ARG PUID=1000
+ENV USER steam
+ENV HOMEDIR "/home/${USER}"
+ENV STEAMCMDDIR "${HOMEDIR}/steamcmd"
 
 ENV STEAMAPPID 730
 ENV STEAMAPP cs2
@@ -29,17 +35,22 @@ RUN set -x \
                 libicu-dev \
                 unzip \
 		jq \
+        && useradd -u "${PUID}" -m "${USER}" \
 	&& mkdir -p "${STEAMAPPDIR}" \
+	&& mkdir -p "${STEAMCMDDIR}" \
 	# Add entry script
 	&& chmod +x "${HOMEDIR}/entry.sh" \
-	&& chown -R "${USER}:${USER}" "${HOMEDIR}/entry.sh" "${STEAMAPPDIR}" \
+	&& chown -R "${USER}:${USER}" "${HOMEDIR}" \
 	# Clean up
         && apt-get clean \
-        && find /var/lib/apt/lists/ -type f -delete
+        && find /var/lib/apt/lists/ -type f -delete \
+        && su "${USER}" -c \
+                "curl -fsSL 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar xvzf - -C \"${STEAMCMDDIR}\" \
+                && \"./${STEAMCMDDIR}/steamcmd.sh\" +quit "\
 
 # BASE
 
-FROM build_stage AS bookworm-base
+FROM build_stage AS sniper-base
 
 ENV CS2_SERVERNAME="cs2 private server" \
     CS2_CHEATS=0 \
