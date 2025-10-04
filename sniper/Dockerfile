@@ -2,21 +2,17 @@
 # Dockerfile that builds a CS2 Gameserver
 ###########################################################
 
-# BUILD STAGE
+# SteamCMD Stage
 
-FROM cm2network/steamcmd:root-bookworm as build_stage
+FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform as steamcmd
 
 LABEL maintainer="joedwards32@gmail.com"
 
-ENV STEAMAPPID 730
-ENV STEAMAPP cs2
-ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
-ENV STEAMAPPVALIDATE 0
-
-COPY etc/entry.sh "${HOMEDIR}/entry.sh"
-COPY etc/server.cfg "/etc/server.cfg"
-COPY etc/pre.sh "/etc/pre.sh"
-COPY etc/post.sh "/etc/post.sh"
+# TODO - Separate stage
+ARG PUID=1000
+ENV USER steam
+ENV HOMEDIR "/home/${USER}"
+ENV STEAMCMDDIR "${HOMEDIR}/steamcmd"
 
 RUN set -x \
 	# Install, update & upgrade packages
@@ -29,17 +25,30 @@ RUN set -x \
                 libicu-dev \
                 unzip \
 		jq \
-	&& mkdir -p "${STEAMAPPDIR}" \
+        && useradd -u "${PUID}" -m "${USER}" \
+	&& mkdir -p "${STEAMCMDDIR}" \
 	# Add entry script
-	&& chmod +x "${HOMEDIR}/entry.sh" \
-	&& chown -R "${USER}:${USER}" "${HOMEDIR}/entry.sh" "${STEAMAPPDIR}" \
+	&& chown -R "${USER}:${USER}" "${HOMEDIR}" \
 	# Clean up
         && apt-get clean \
-        && find /var/lib/apt/lists/ -type f -delete
+        && find /var/lib/apt/lists/ -type f -delete \
+        && su "${USER}" -c \
+                "curl -fsSL 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar xvzf - -C \"${STEAMCMDDIR}\" \
+                && \"./${STEAMCMDDIR}/steamcmd.sh\" +quit "
 
-# BASE
+# CS2
 
-FROM build_stage AS bookworm-base
+FROM steamcmd AS cs2
+
+ENV STEAMAPPID 730
+ENV STEAMAPP cs2
+ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
+ENV STEAMAPPVALIDATE 0
+
+COPY etc/entry.sh "${HOMEDIR}/entry.sh"
+COPY etc/server.cfg "/etc/server.cfg"
+COPY etc/pre.sh "/etc/pre.sh"
+COPY etc/post.sh "/etc/post.sh"
 
 ENV CS2_SERVERNAME="cs2 private server" \
     CS2_CHEATS=0 \
@@ -73,6 +82,8 @@ ENV CS2_SERVERNAME="cs2 private server" \
 # Set permissions on STEAMAPPDIR
 #   Permissions may need to be reset if persistent volume mounted
 RUN set -x \
+	&& mkdir -p "${STEAMAPPDIR}" \
+	&& chmod +x "${HOMEDIR}/entry.sh" \
         && chown -R "${USER}:${USER}" "${STEAMAPPDIR}" \
         && chmod 0777 "${STEAMAPPDIR}"
 
