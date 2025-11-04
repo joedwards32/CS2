@@ -2,17 +2,23 @@
 # Dockerfile that builds a CS2 Gameserver
 ###########################################################
 
+# Global ARGs
+
+ARG PUID=1000
+ARG USER=steam
+ARG HOMEDIR="/home/${USER}"
+ARG STEAMCMDDIR="${HOMEDIR}/steamcmd"
+
 # SteamCMD Stage
 
 FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform as steamcmd
 
 LABEL maintainer="joedwards32@gmail.com"
 
-# TODO - Separate stage
-ARG PUID=1000
-ENV USER steam
-ENV HOMEDIR "/home/${USER}"
-ENV STEAMCMDDIR "${HOMEDIR}/steamcmd"
+ARG PUID
+ARG USER
+ARG HOMEDIR
+ARG STEAMCMDDIR
 
 RUN set -x \
 	# Install, update & upgrade packages
@@ -40,10 +46,16 @@ RUN set -x \
 
 FROM steamcmd AS cs2
 
-ENV STEAMAPPID 730
-ENV STEAMAPP cs2
-ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
-ENV STEAMAPPVALIDATE 0
+ARG PUID
+ARG USER
+ARG HOMEDIR
+ARG STEAMCMDDIR
+
+ENV STEAMAPPID=730
+ENV STEAMAPP=cs2
+ENV STEAMCMDDIR="${STEAMCMDDIR}"
+ENV STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-dedicated"
+ENV STEAMAPPVALIDATE=0
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/server.cfg "/etc/server.cfg"
