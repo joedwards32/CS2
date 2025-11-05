@@ -5,8 +5,9 @@
 # Global ARGs
 
 ARG PUID=1000
+ARG PGID=1000
 ARG USER=steam
-ARG HOMEDIR="/home/${USER}"
+ARG HOMEDIR="/home/steam"
 ARG STEAMCMDDIR="${HOMEDIR}/steamcmd"
 
 # SteamCMD Stage
@@ -16,6 +17,7 @@ FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform as steamcmd
 LABEL maintainer="joedwards32@gmail.com"
 
 ARG PUID
+ARG PGID
 ARG USER
 ARG HOMEDIR
 ARG STEAMCMDDIR
@@ -34,7 +36,7 @@ RUN set -x \
         && useradd -u "${PUID}" -m "${USER}" \
 	&& mkdir -p "${STEAMCMDDIR}" \
 	# Add entry script
-	&& chown -R "${USER}:${USER}" "${HOMEDIR}" \
+	&& chown -R "${PUID}:${PGID}" "${HOMEDIR}" \
 	# Clean up
         && apt-get clean \
         && find /var/lib/apt/lists/ -type f -delete \
@@ -47,6 +49,7 @@ RUN set -x \
 FROM steamcmd AS cs2
 
 ARG PUID
+ARG PGID
 ARG USER
 ARG HOMEDIR
 ARG STEAMCMDDIR
@@ -96,11 +99,11 @@ ENV CS2_SERVERNAME="cs2 private server" \
 RUN set -x \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& chmod +x "${HOMEDIR}/entry.sh" \
-        && chown -R "${USER}:${USER}" "${STEAMAPPDIR}" \
+        && chown -R "${PUID}:${PGID}" "${STEAMAPPDIR}" \
         && chmod 0777 "${STEAMAPPDIR}"
 
 # Switch to user
-USER ${USER}
+USER ${PUID}:${PGID}
 
 WORKDIR ${HOMEDIR}
 
