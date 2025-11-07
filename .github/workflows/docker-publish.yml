@@ -21,7 +21,6 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
-
 jobs:
   build:
 
@@ -68,6 +67,17 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
             type=semver,pattern={{version}}
 
+      - name: Pelican Docker metadata
+        id: meta_pelican
+        uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
+        with:
+          images: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest-pelican,enable={{is_default_branch}}
+            type=semver,pattern={{version}}-pelican
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -78,3 +88,16 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Pelican image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: ./sniper
+          file: ./sniper/Dockerfile
+          build-args: |
+            USER=container
+            PUID=999
+            PGID=988
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta_pelican.outputs.tags }}
+          labels: ${{ steps.meta_pelican.outputs.labels }}
