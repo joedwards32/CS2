@@ -2,17 +2,25 @@
 # Dockerfile that builds a CS2 Gameserver
 ###########################################################
 
+# Global ARGs
+
+ARG PUID=1000
+ARG PGID=1000
+ARG USER=steam
+ARG HOMEDIR="/home/steam"
+ARG STEAMCMDDIR="${HOMEDIR}/steamcmd"
+
 # SteamCMD Stage
 
 FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform as steamcmd
 
 LABEL maintainer="joedwards32@gmail.com"
 
-# TODO - Separate stage
-ARG PUID=1000
-ENV USER steam
-ENV HOMEDIR "/home/${USER}"
-ENV STEAMCMDDIR "${HOMEDIR}/steamcmd"
+ARG PUID
+ARG PGID
+ARG USER
+ARG HOMEDIR
+ARG STEAMCMDDIR
 
 RUN set -x \
 	# Install, update & upgrade packages
@@ -28,7 +36,7 @@ RUN set -x \
         && useradd -u "${PUID}" -m "${USER}" \
 	&& mkdir -p "${STEAMCMDDIR}" \
 	# Add entry script
-	&& chown -R "${USER}:${USER}" "${HOMEDIR}" \
+	&& chown -R "${PUID}:${PGID}" "${HOMEDIR}" \
 	# Clean up
         && apt-get clean \
         && find /var/lib/apt/lists/ -type f -delete \
@@ -40,10 +48,17 @@ RUN set -x \
 
 FROM steamcmd AS cs2
 
-ENV STEAMAPPID 730
-ENV STEAMAPP cs2
-ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
-ENV STEAMAPPVALIDATE 0
+ARG PUID
+ARG PGID
+ARG USER
+ARG HOMEDIR
+ARG STEAMCMDDIR
+
+ENV STEAMAPPID=730
+ENV STEAMAPP=cs2
+ENV STEAMCMDDIR="${STEAMCMDDIR}"
+ENV STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-dedicated"
+ENV STEAMAPPVALIDATE=0
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/server.cfg "/etc/server.cfg"
@@ -84,11 +99,11 @@ ENV CS2_SERVERNAME="cs2 private server" \
 RUN set -x \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& chmod +x "${HOMEDIR}/entry.sh" \
-        && chown -R "${USER}:${USER}" "${STEAMAPPDIR}" \
+        && chown -R "${PUID}:${PGID}" "${STEAMAPPDIR}" \
         && chmod 0777 "${STEAMAPPDIR}"
 
 # Switch to user
-USER ${USER}
+USER ${PUID}:${PGID}
 
 WORKDIR ${HOMEDIR}
 
