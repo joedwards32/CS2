@@ -128,6 +128,16 @@ if [[ ! -z $CS2_BOT_QUOTA_MODE ]] ; then
     sed -i "s/bot_quota_mode.*/bot_quota_mode ${CS2_BOT_QUOTA_MODE}/" "${STEAMAPPDIR}"/game/csgo/cfg/*
 fi
 
+# Rewrite tv_delay in gamemode_competitive.cfg (because it supersedes the value in server.cfg)
+if [[ -n "${TV_DELAY}" ]]; then
+    COMPETITIVE_CFG="${STEAMAPPDIR}/game/csgo/cfg/gamemode_competitive.cfg"
+    if grep -q "^tv_delay" "$COMPETITIVE_CFG"; then
+        sed -ri "s/^tv_delay[[:space:]]+.*/tv_delay ${TV_DELAY}/" "$COMPETITIVE_CFG"
+    else
+        echo "tv_delay ${TV_DELAY}" >> "$COMPETITIVE_CFG"
+    fi
+fi
+
 # Switch to server directory
 cd "${STEAMAPPDIR}/game/"
 
