@@ -12,7 +12,7 @@ ARG STEAMCMDDIR="${HOMEDIR}/steamcmd"
 
 # SteamCMD Stage
 
-FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform as steamcmd
+FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform AS steamcmd
 
 LABEL maintainer="joedwards32@gmail.com"
 
@@ -73,12 +73,13 @@ ENV CS2_SERVERNAME="cs2 private server" \
     CS2_RCON_PORT="" \
     CS2_MAXPLAYERS=10 \
     CS2_RCONPW="changeme" \
-    CS2_MAPGROUP="mg_active" \    
+    CS2_MAPGROUP="mg_active" \
     CS2_STARTMAP="de_inferno" \
     CS2_GAMEALIAS="" \
     CS2_GAMETYPE=0 \
     CS2_GAMEMODE=1 \
     CS2_LAN=0 \
+    CS2_SERVER_DELTATICKS_ENFORCE=2 \
     TV_AUTORECORD=0 \
     TV_ENABLE=0 \
     TV_PORT=27020 \
@@ -86,6 +87,7 @@ ENV CS2_SERVERNAME="cs2 private server" \
     TV_RELAY_PW="changeme" \
     TV_MAXRATE=0 \
     TV_DELAY=0 \
+    TV_RELAYVOICE=1 \
     SRCDS_TOKEN="" \
     CS2_CFG_URL="" \
     CS2_LOG="on" \
