@@ -106,6 +106,7 @@ sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
        -e "s/{{SERVER_HIBERNATE}}/${CS2_SERVER_HIBERNATE}/g" \
        -e "s/{{SERVER_PW}}/${CS2_PW}/g" \
        -e "s/{{SERVER_RCON_PW}}/${CS2_RCONPW}/g" \
+       -e "s/{{SERVER_DELTATICKS_ENFORCE}}/${CS2_SERVER_DELTATICKS_ENFORCE}/g" \
        -e "s/{{TV_ENABLE}}/${TV_ENABLE}/g" \
        -e "s/{{TV_PORT}}/${TV_PORT}/g" \
        -e "s/{{TV_AUTORECORD}}/${TV_AUTORECORD}/g" \
@@ -113,6 +114,7 @@ sed -i -e "s/{{SERVER_HOSTNAME}}/${CS2_SERVERNAME}/g" \
        -e "s/{{TV_RELAY_PW}}/${TV_RELAY_PW}/g" \
        -e "s/{{TV_MAXRATE}}/${TV_MAXRATE}/g" \
        -e "s/{{TV_DELAY}}/${TV_DELAY}/g" \
+       -e "s/{{TV_RELAYVOICE}}/${TV_RELAYVOICE}/g" \
        -e "s/{{SERVER_LOG}}/${CS2_LOG}/g" \
        -e "s/{{SERVER_LOG_FILE}}/${CS2_LOG_FILE}/g" \
        -e "s/{{SERVER_LOG_ECHO}}/${CS2_LOG_ECHO}/g" \
