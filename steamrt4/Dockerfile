@@ -12,7 +12,7 @@ ARG STEAMCMDDIR="${HOMEDIR}/steamcmd"
 
 # SteamCMD Stage
 
-FROM registry.gitlab.steamos.cloud/steamrt/sniper/platform AS steamcmd
+FROM registry.gitlab.steamos.cloud/steamrt/steamrt4/sdk AS steamcmd
 
 LABEL maintainer="joedwards32@gmail.com"
 
@@ -29,7 +29,7 @@ RUN set -x \
 		wget \
 		ca-certificates \
 		lib32z1 \
-                simpleproxy \
+                socat \
                 libicu-dev \
                 unzip \
 		jq \

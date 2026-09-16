@@ -197,8 +197,8 @@ fi
 # Start Server
 
 if [[ ! -z $CS2_RCON_PORT ]]; then
-    echo "Establishing Simpleproxy for ${CS2_RCON_PORT} to 127.0.0.1:${CS2_PORT}"
-    simpleproxy -L "${CS2_RCON_PORT}" -R 127.0.0.1:"${CS2_PORT}" &
+    echo "Establishing socat proxy for ${CS2_RCON_PORT} to 127.0.0.1:${CS2_PORT}"
+    socat TCP-LISTEN:"${CS2_RCON_PORT}",fork TCP:127.0.0.1:"${CS2_PORT}" &
 fi
 
 echo "Starting CS2 Dedicated Server"
