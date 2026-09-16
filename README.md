@@ -31,6 +31,12 @@ $ SRCDS_TOKEN="..." # check https://steamcommunity.com/dev/managegameservers
 $ docker run -d --name=cs2 -e SRCDS_TOKEN="$SRCDS_TOKEN" -v $(pwd)/cs2-data:/home/steam/cs2-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp joedwards32/cs2
 ```
 
+### Easypanel
+
+[Easypanel](https://easypanel.io) is a self-hosted Docker deployment platform. It has a one-click Easypanel template for this image, with a persistent volume for the game data.
+
+[![Deploy on Easypanel](https://easypanel.io/img/deploy-on-easypanel-40.svg)](https://easypanel.io/templates/cs2)
+
 or using docker-compose, see [examples](https://github.com/joedwards32/CS2/blob/main/examples/docker-compose.yml):
 ```console
 # Remember to update passwords and SRCDS_TOKEN in your compose file
