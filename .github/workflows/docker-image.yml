@@ -15,5 +15,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      working-directory: ./sniper
+      working-directory: ./steamrt4
       run: docker build . --file Dockerfile --tag joedwards32/cs2:latest
