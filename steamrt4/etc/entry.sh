@@ -34,9 +34,12 @@ while [[ $steamcmd_rc != 0 ]] && [[ $attempt -lt $MAX_ATTEMPTS ]]; do
     if [[ $attempt -gt 1 ]]; then
         echo "Retrying SteamCMD, attempt ${attempt}"
         # Stale appmanifest data can lead for HTTP 401 errors when requesting old
-        # files from SteamPipe CDN
-        echo "Removing steamapps (appmanifest data)..."
-        rm -rf "${STEAMAPPDIR}/steamapps"
+        # files from SteamPipe CDN. Removing it forces a full re-download, so only
+        # do it before the last attempt; a transient failure gets a plain retry.
+        if [[ $attempt -eq $MAX_ATTEMPTS ]]; then
+            echo "Removing steamapps (appmanifest data)..."
+            rm -rf "${STEAMAPPDIR}/steamapps"
+        fi
     fi
     eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
                                 +force_install_dir "${STEAMAPPDIR}" \
