@@ -33,10 +33,17 @@ while [[ $steamcmd_rc != 0 ]] && [[ $attempt -lt $MAX_ATTEMPTS ]]; do
     ((attempt+=1))
     if [[ $attempt -gt 1 ]]; then
         echo "Retrying SteamCMD, attempt ${attempt}"
-        # Stale appmanifest data can lead for HTTP 401 errors when requesting old
-        # files from SteamPipe CDN
-        echo "Removing steamapps (appmanifest data)..."
-        rm -rf "${STEAMAPPDIR}/steamapps"
+        if [[ $attempt -lt $MAX_ATTEMPTS ]]; then
+            # Re-verify the existing files first: repairs a corrupt or
+            # half-applied update with a delta download and keeps the install.
+            VALIDATE="validate"
+        else
+            # Stale appmanifest data can lead for HTTP 401 errors when requesting old
+            # files from SteamPipe CDN. Removing it forces a full re-download, so
+            # this is the last resort.
+            echo "Removing steamapps (appmanifest data)..."
+            rm -rf "${STEAMAPPDIR}/steamapps"
+        fi
     fi
     eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
                                 +force_install_dir "${STEAMAPPDIR}" \
@@ -45,6 +52,10 @@ while [[ $steamcmd_rc != 0 ]] && [[ $attempt -lt $MAX_ATTEMPTS ]]; do
 				+app_update "${STEAMAPPID}" -beta "${STEAMAPPVERSION}" "${VALIDATE}"\
 				+quit
     steamcmd_rc=$?
+    if [[ $steamcmd_rc != 0 ]]; then
+        echo "SteamCMD failed (rc ${steamcmd_rc}), free space on ${STEAMAPPDIR}:"
+        df -h "${STEAMAPPDIR}"
+    fi
 done
 
 ## Exit if steamcmd fails
