@@ -22,27 +22,36 @@ ARG USER
 ARG HOMEDIR
 ARG STEAMCMDDIR
 
-RUN set -x \
-	# Install, update & upgrade packages
-	&& apt-get update \
-	&& apt-get install -y --no-install-recommends --no-install-suggests \
-		wget \
-		ca-certificates \
-		lib32z1 \
-                socat \
-                libicu-dev \
-                unzip \
-		jq \
-        && useradd -u "${PUID}" -m "${USER}" \
-	&& mkdir -p "${STEAMCMDDIR}" \
-	# Add entry script
-	&& chown -R "${PUID}:${PGID}" "${HOMEDIR}" \
-	# Clean up
-        && apt-get clean \
-        && find /var/lib/apt/lists/ -type f -delete \
-        && su "${USER}" -c \
-                "curl -fsSL 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar xvzf - -C \"${STEAMCMDDIR}\" \
-                && \"./${STEAMCMDDIR}/steamcmd.sh\" +quit "
+# Install system dependencies
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        wget \
+        curl \
+        ca-certificates \
+        lib32z1 \
+        socat \
+        libicu-dev \
+        unzip \
+        jq; \
+    rm -rf /var/lib/apt/lists/*
+
+# Create application user and directories
+RUN set -eux; \
+    useradd -u "${PUID}" -m "${USER}"; \
+    mkdir -p "${STEAMCMDDIR}"; \
+    chown -R "${PUID}:${PGID}" "${HOMEDIR}"
+
+# Download and extract SteamCMD
+RUN set -eux; \
+    curl -fSL \
+        https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz \
+        | tar -xzv -C "${STEAMCMDDIR}"
+
+# Initialise SteamCMD
+RUN set -eux; \
+    cd "${STEAMCMDDIR}"; \
+    su "${USER}" -c "./steamcmd.sh +quit"
 
 # CS2
 
